@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monday Morning Pulse — Humble Brands</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --primary: #2E75B6;
+            --primary-light: #EBF5FB;
+            --dark-text: #2D3436;
+            --light-bg: #F8F9FA;
+            --border: #E0E3E8;
+            --amazon: #27AE60;
+            --amazon-light: #E8F8F5;
+            --dtc: #E67E22;
+            --dtc-light: #FEF5E7;
+            --brand: #8E44AD;
+            --brand-light: #F4ECF7;
+            --klaviyo: #3498DB;
+            --klaviyo-light: #EBF5FB;
+            --recharge: #9B59B6;
+            --recharge-light: #F5EEF8;
+            --paid: #E74C3C;
+            --paid-light: #FADBD8;
+            --social: #1ABC9C;
+            --social-light: #E8F8F5;
+            --green: #27AE60;
+            --green-bg: #E8F8F5;
+            --yellow: #F39C12;
+            --yellow-bg: #FEF9E7;
+            --red: #E74C3C;
+            --red-bg: #FADBD8;
+            --gray: #95A5A6;
+            --gray-bg: #F4F6F7;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #FFFFFF;
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, #FFFFFF 0%, var(--light-bg) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 32px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .header-content { max-width: 1400px; margin: 0 auto; }
+        .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+        h1 { font-size: 24px; font-weight: 700; color: var(--dark-text); }
+        .header-meta { font-size: 13px; color: #6C7A89; font-weight: 500; }
+        .header-date { font-size: 14px; color: #6C7A89; font-weight: 500; margin-bottom: 16px; }
+        .source-badges { display: flex; gap: 8px; margin-bottom: 16px; }
+        .source-badge {
+            font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 12px;
+            text-transform: uppercase; letter-spacing: 0.3px;
+        }
+        .source-badge.ok { background: var(--green-bg); color: var(--green); }
+        .source-badge.missing { background: var(--yellow-bg); color: var(--yellow); }
+        .source-badge.error { background: var(--red-bg); color: var(--red); }
+
+        /* TABS */
+        .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); overflow-x: auto; }
+        .tab-btn {
+            padding: 12px 18px; background: none; border: none;
+            border-bottom: 3px solid transparent; color: #6C7A89;
+            font-size: 13px; font-weight: 600; cursor: pointer;
+            transition: all 0.2s; white-space: nowrap;
+        }
+        .tab-btn:hover { color: var(--dark-text); }
+        .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+        /* MAIN */
+        .container { max-width: 1400px; margin: 0 auto; padding: 28px 32px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.2s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* KPI CARDS */
+        .kpi-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px; margin-bottom: 28px;
+        }
+        .kpi-card {
+            background: white; border: 1px solid var(--border); border-radius: 10px;
+            padding: 18px; transition: box-shadow 0.2s; position: relative; overflow: hidden;
+        }
+        .kpi-card:hover { box-shadow: 0 4px 14px rgba(0,0,0,0.07); }
+        .kpi-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+        }
+        .kpi-card.amazon::before { background: var(--amazon); }
+        .kpi-card.dtc::before { background: var(--dtc); }
+        .kpi-card.klaviyo::before { background: var(--klaviyo); }
+        .kpi-card.subs::before { background: var(--recharge); }
+        .kpi-card.paid::before { background: var(--paid); }
+        .kpi-card.total::before { background: var(--primary); }
+
+        .kpi-label {
+            font-size: 11px; font-weight: 600; color: #6C7A89;
+            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;
+        }
+        .kpi-value { font-size: 26px; font-weight: 700; color: var(--dark-text); }
+        .kpi-delta {
+            display: inline-flex; align-items: center; gap: 3px;
+            font-size: 12px; font-weight: 600; margin-top: 6px; padding: 2px 8px;
+            border-radius: 10px;
+        }
+        .kpi-delta.up { color: var(--green); background: var(--green-bg); }
+        .kpi-delta.down { color: var(--red); background: var(--red-bg); }
+        .kpi-delta.flat { color: var(--gray); background: var(--gray-bg); }
+        .kpi-sparkline { margin-top: 10px; height: 32px; }
+        .kpi-sparkline canvas { width: 100% !important; height: 32px !important; }
+
+        /* SIGNAL CARDS */
+        .signals-section { margin-bottom: 28px; }
+        .section-title {
+            font-size: 13px; font-weight: 700; color: var(--dark-text);
+            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .section-title .icon { font-size: 16px; }
+        .signals-list { display: flex; flex-direction: column; gap: 8px; }
+        .signal-card {
+            padding: 12px 16px; border-left: 4px solid; border-radius: 6px;
+            font-size: 13px; line-height: 1.5; display: flex; align-items: flex-start; gap: 10px;
+        }
+        .signal-card .dot {
+            width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 4px;
+        }
+        .signal-card.green { border-left-color: var(--green); background: var(--green-bg); }
+        .signal-card.green .dot { background: var(--green); }
+        .signal-card.yellow { border-left-color: var(--yellow); background: var(--yellow-bg); }
+        .signal-card.yellow .dot { background: var(--yellow); }
+        .signal-card.red { border-left-color: var(--red); background: var(--red-bg); }
+        .signal-card.red .dot { background: var(--red); }
+        .signal-card.gray { border-left-color: var(--gray); background: var(--gray-bg); }
+        .signal-card.gray .dot { background: var(--gray); }
+        .signal-channel { font-weight: 700; }
+
+        /* GUARDRAILS */
+        .guardrails-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 10px; margin-bottom: 28px;
+        }
+        .guardrail-item {
+            display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+            background: white; border: 1px solid var(--border); border-radius: 8px;
+            font-size: 13px;
+        }
+        .guardrail-icon { font-size: 16px; flex-shrink: 0; }
+        .guardrail-label { color: #6C7A89; flex: 1; }
+        .guardrail-value { font-weight: 700; }
+        .guardrail-target { font-size: 11px; color: #6C7A89; }
+
+        /* WATCH ITEMS */
+        .watch-list { display: flex; flex-direction: column; gap: 10px; }
+        .watch-item {
+            padding: 14px 18px; background: white; border: 1px solid var(--border);
+            border-radius: 8px; display: flex; gap: 12px;
+        }
+        .watch-number {
+            font-size: 14px; font-weight: 700; color: var(--primary);
+            background: var(--primary-light); width: 28px; height: 28px;
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; flex-shrink: 0;
+        }
+        .watch-content { flex: 1; }
+        .watch-action { font-weight: 600; font-size: 13px; margin-bottom: 2px; }
+        .watch-why { font-size: 12px; color: #6C7A89; }
+
+        /* CHART CONTAINERS */
+        .chart-row {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px; margin-bottom: 28px;
+        }
+        .chart-card {
+            background: white; border: 1px solid var(--border); border-radius: 10px;
+            padding: 20px;
+        }
+        .chart-card h3 {
+            font-size: 14px; font-weight: 700; margin-bottom: 16px;
+            color: var(--dark-text);
+        }
+        .chart-wrapper { position: relative; height: 260px; }
+        .chart-wrapper.short { height: 200px; }
+        .chart-wrapper.tall { height: 320px; }
+
+        /* TABLES */
+        .data-table {
+            width: 100%; border-collapse: collapse; background: white;
+            border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .data-table thead { background: var(--light-bg); }
+        .data-table th {
+            padding: 10px 14px; text-align: left; font-size: 11px;
+            font-weight: 700; color: var(--dark-text); text-transform: uppercase;
+            letter-spacing: 0.5px; border-bottom: 2px solid var(--border);
+        }
+        .data-table td {
+            padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 13px;
+        }
+        .data-table tbody tr:last-child td { border-bottom: none; }
+        .data-table tbody tr:hover { background: #FAFBFC; }
+        .data-table .num { font-variant-numeric: tabular-nums; text-align: right; font-weight: 600; }
+
+        /* CORRIDOR VIZ */
+        .corridor-viz {
+            background: white; border: 1px solid var(--border); border-radius: 10px;
+            padding: 24px; margin-bottom: 28px;
+        }
+        .corridor-bar {
+            display: flex; height: 48px; border-radius: 8px; overflow: hidden; margin: 16px 0;
+            position: relative;
+        }
+        .corridor-zone {
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px; font-weight: 700; color: white;
+        }
+        .corridor-zone.intervene { background: var(--red); flex: 1; }
+        .corridor-zone.hold { background: var(--yellow); flex: 1; }
+        .corridor-zone.scale { background: var(--green); flex: 1; }
+        .corridor-marker {
+            position: absolute; top: -8px; width: 4px; height: 64px;
+            background: var(--dark-text); border-radius: 2px;
+        }
+        .corridor-marker::after {
+            content: attr(data-label); position: absolute; top: -22px;
+            left: 50%; transform: translateX(-50%); font-size: 11px;
+            font-weight: 700; white-space: nowrap; color: var(--dark-text);
+        }
+        .corridor-labels {
+            display: flex; justify-content: space-between; font-size: 11px;
+            color: #6C7A89; margin-top: 4px;
+        }
+
+        /* METRICS ROW */
+        .metrics-row {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px; margin-bottom: 24px;
+        }
+        .metric-mini {
+            background: var(--light-bg); border-radius: 8px; padding: 14px; text-align: center;
+        }
+        .metric-mini-label { font-size: 11px; color: #6C7A89; text-transform: uppercase; letter-spacing: 0.3px; }
+        .metric-mini-value { font-size: 20px; font-weight: 700; margin-top: 4px; }
+        .metric-mini-delta { font-size: 11px; margin-top: 2px; }
+
+        /* DONUT LEGEND */
+        .donut-container { display: flex; align-items: center; gap: 24px; }
+        .donut-chart-wrap { width: 180px; height: 180px; flex-shrink: 0; }
+        .donut-legend { display: flex; flex-direction: column; gap: 8px; }
+        .donut-legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+        .donut-legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+        /* STATUS DOT */
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+        .status-dot.green { background: var(--green); }
+        .status-dot.yellow { background: var(--yellow); }
+        .status-dot.red { background: var(--red); }
+        .status-dot.gray { background: var(--gray); }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            header { padding: 16px; }
+            .container { padding: 16px; }
+            h1 { font-size: 20px; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .chart-row { grid-template-columns: 1fr; }
+            .kpi-value { font-size: 22px; }
+            .tabs { gap: 0; }
+            .tab-btn { padding: 10px 12px; font-size: 12px; }
+        }
+
+        /* LOADING STATE */
+        .loading {
+            display: flex; align-items: center; justify-content: center;
+            height: 200px; color: #6C7A89; font-size: 14px;
+        }
+        .pending-badge {
+            display: inline-block; font-size: 11px; font-weight: 600;
+            padding: 2px 8px; border-radius: 10px;
+            background: var(--yellow-bg); color: var(--yellow);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-top">
+                <h1>Monday Morning Pulse</h1>
+                <span class="header-meta">Humble Brands</span>
+            </div>
+            <div class="header-date" id="headerDate">Loading...</div>
+            <div class="source-badges" id="sourceBadges"></div>
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('overview')">Overview</button>
+                <button class="tab-btn" onclick="switchTab('amazon')">Amazon</button>
+                <button class="tab-btn" onclick="switchTab('dtc')">DTC / Shopify</button>
+                <button class="tab-btn" onclick="switchTab('klaviyo')">Email / Klaviyo</button>
+                <button class="tab-btn" onclick="switchTab('paid')">Paid Media</button>
+                <button class="tab-btn" onclick="switchTab('subs')">Subs & Social</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- ==================== OVERVIEW TAB ==================== -->
+        <div class="tab-content active" id="tab-overview">
+            <div class="kpi-grid" id="overviewKpis"></div>
+
+            <div class="signals-section">
+                <div class="section-title"><span class="icon">&#9432;</span> Top Signals</div>
+                <div class="signals-list" id="signalsList"></div>
+            </div>
+
+            <div class="signals-section">
+                <div class="section-title"><span class="icon">&#9888;</span> Guardrail Check</div>
+                <div class="guardrails-grid" id="guardrailsList"></div>
+            </div>
+
+            <div class="signals-section">
+                <div class="section-title"><span class="icon">&#127919;</span> Leadership Watch Items</div>
+                <div class="watch-list" id="watchList"></div>
+            </div>
+
+            <div class="chart-row">
+                <div class="chart-card">
+                    <h3>Total Revenue — 9-Week Trend</h3>
+                    <div class="chart-wrapper"><canvas id="revenueTrendChart"></canvas></div>
+                </div>
+                <div class="chart-card">
+                    <h3>Revenue by Channel</h3>
+                    <div class="chart-wrapper"><canvas id="revenueStackedChart"></canvas></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== AMAZON TAB ==================== -->
+        <div class="tab-content" id="tab-amazon">
+            <div class="metrics-row" id="amazonMetrics"></div>
+
+            <div class="corridor-viz">
+                <h3>Amazon Scaling Corridor</h3>
+                <div class="corridor-bar">
+                    <div class="corridor-zone intervene">Intervene</div>
+                    <div class="corridor-zone hold">Hold</div>
+                    <div class="corridor-zone scale">Scale</div>
+                    <div class="corridor-marker" id="corridorMarker"></div>
+                </div>
+                <div class="corridor-labels">
+                    <span>Margin &lt;25% or TACOS &gt;10%</span>
+                    <span>Margin 25-30% or TACOS 8-10%</span>
+                    <span>Margin &gt;30% &amp; TACOS &lt;8.3%</span>
+                </div>
+            </div>
+
+            <div class="chart-row">
+                <div class="chart-card">
+                    <h3>Amazon Revenue Trend</h3>
+                    <div class="chart-wrapper"><canvas id="amazonRevChart"></canvas></div>
+                </div>
+                <div class="chart-card">
+                    <h3>TACOS &amp; Margin Trend</h3>
+                    <div class="chart-wrapper"><canvas id="amazonTacosChart"></canvas></div>
+                </div>
+            </div>
+
+            <div class="chart-card" style="margin-bottom:28px">
+                <h3>Top ASINs</h3>
+                <table class="data-table" id="asinTable">
+                    <thead><tr><th>Product</th><th class="num">Revenue</th><th class="num">Units</th><th class="num">ACOS</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ==================== DTC TAB ==================== -->
+        <div class="tab-content" id="tab-dtc">
+            <div class="metrics-row" id="dtcMetrics"></div>
+
+            <div class="chart-row">
+                <div class="chart-card">
+                    <h3>DTC Revenue Trend</h3>
+                    <div class="chart-wrapper"><canvas id="dtcRevChart"></canvas></div>
+                </div>
+                <div class="chart-card">
+                    <h3>AOV &amp; Conversion Rate Trend</h3>
+                    <div class="chart-wrapper"><canvas id="dtcAovChart"></canvas></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== KLAVIYO TAB ==================== -->
+        <div class="tab-content" id="tab-klaviyo">
+            <div class="metrics-row" id="klaviyoMetrics"></div>
+
+            <div class="chart-row">
+                <div class="chart-card">
+                    <h3>Email Revenue Attribution</h3>
+                    <div class="chart-wrapper short">
+                        <div class="donut-container">
+                            <div class="donut-chart-wrap"><canvas id="emailDonutChart"></canvas></div>
+                            <div class="donut-legend" id="emailDonutLegend"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h3>Email Revenue Trend</h3>
+                    <div class="chart-wrapper"><canvas id="emailRevChart"></canvas></div>
+                </div>
+            </div>
+
+            <div class="chart-card" style="margin-bottom:20px">
+                <h3>Campaign Performance</h3>
+                <table class="data-table" id="campaignTable">
+                    <thead><tr><th>Campaign</th><th class="num">Sent</th><th class="num">Open Rate</th><th class="num">Click Rate</th><th class="num">Revenue</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="chart-card">
+                <h3>Flow Performance</h3>
+                <table class="data-table" id="flowTable">
+                    <thead><tr><th>Flow</th><th class="num">Open Rate</th><th class="num">Click Rate</th><th class="num">Revenue</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ==================== PAID MEDIA TAB ==================== -->
+        <div class="tab-content" id="tab-paid">
+            <div class="metrics-row" id="paidMetrics"></div>
+
+            <div class="chart-row">
+                <div class="chart-card">
+                    <h3>Google vs Meta — Spend &amp; Revenue</h3>
+                    <div class="chart-wrapper"><canvas id="paidCompareChart"></canvas></div>
+                </div>
+                <div class="chart-card">
+                    <h3>Blended ROAS Trend</h3>
+                    <div class="chart-wrapper"><canvas id="roasTrendChart"></canvas></div>
+                </div>
+            </div>
+
+            <div class="chart-row">
+                <div class="chart-card">
+                    <h3>Google Ads</h3>
+                    <div class="metrics-row" id="googleMetrics"></div>
+                </div>
+                <div class="chart-card">
+                    <h3>Meta Ads</h3>
+                    <div class="metrics-row" id="metaMetrics"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SUBS & SOCIAL TAB ==================== -->
+        <div class="tab-content" id="tab-subs">
+            <div class="section-title" style="margin-bottom:16px">Subscriptions (Recharge)</div>
+            <div class="metrics-row" id="subsMetrics"></div>
+
+            <div class="chart-row">
+                <div class="chart-card">
+                    <h3>Active Subscribers Trend</h3>
+                    <div class="chart-wrapper"><canvas id="subsChart"></canvas></div>
+                </div>
+                <div class="chart-card">
+                    <h3>Social Followers Trend</h3>
+                    <div class="chart-wrapper"><canvas id="socialChart"></canvas></div>
+                </div>
+            </div>
+
+            <div class="section-title" style="margin-bottom:16px">Social Media</div>
+            <div class="metrics-row" id="socialMetrics"></div>
+
+            <div class="section-title" style="margin-top:28px;margin-bottom:16px">GA4 / Web Analytics</div>
+            <div class="metrics-row" id="ga4Metrics"></div>
+
+            <div class="chart-card" style="margin-top:20px">
+                <h3>Top Pages</h3>
+                <table class="data-table" id="pagesTable">
+                    <thead><tr><th>Page</th><th class="num">Sessions</th><th class="num">CVR</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // ============================================================
+    // DATA LOADING
+    // ============================================================
+    let DATA = null;
+    let HISTORY = null;
+    const chartInstances = {};
+
+    async function loadData() {
+        try {
+            const [currentRes, historyRes] = await Promise.all([
+                fetch('data/current.json'),
+                fetch('data/history.json')
+            ]);
+            DATA = await currentRes.json();
+            HISTORY = await historyRes.json();
+        } catch (e) {
+            // Fallback: try inline data (for self-contained mode)
+            console.warn('Fetch failed, checking for inline data:', e);
+            if (window.__INLINE_DATA__) DATA = window.__INLINE_DATA__;
+            if (window.__INLINE_HISTORY__) HISTORY = window.__INLINE_HISTORY__;
+        }
+        if (DATA && HISTORY) renderAll();
+        else document.querySelector('.container').innerHTML = '<div class="loading">Unable to load data. Ensure data/current.json and data/history.json are available.</div>';
+    }
+
+    // ============================================================
+    // HELPERS
+    // ============================================================
+    const fmt = {
+        usd: (v) => v == null ? '—' : '$' + v.toLocaleString('en-US', { maximumFractionDigits: 0 }),
+        usdDec: (v) => v == null ? '—' : '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+        pct: (v) => v == null ? '—' : v.toFixed(1) + '%',
+        num: (v) => v == null ? '—' : v.toLocaleString('en-US'),
+        x: (v) => v == null ? '—' : v.toFixed(1) + 'x',
+        delta: (v) => {
+            if (v == null) return { text: '—', cls: 'flat' };
+            const arrow = v > 0 ? '&#9650;' : v < 0 ? '&#9660;' : '&#9644;';
+            const cls = v > 0 ? 'up' : v < 0 ? 'down' : 'flat';
+            return { text: `${arrow} ${Math.abs(v).toFixed(1)}%`, cls };
+        },
+        deltaRaw: (v, suffix = '') => {
+            if (v == null) return { text: '—', cls: 'flat' };
+            const sign = v > 0 ? '+' : '';
+            const cls = v > 0 ? 'up' : v < 0 ? 'down' : 'flat';
+            return { text: `${sign}${v}${suffix}`, cls };
+        }
+    };
+
+    function makeKpiCard(label, value, delta, colorClass, historyKey) {
+        const d = typeof delta === 'object' ? delta : fmt.delta(delta);
+        const sparkId = `spark-${label.replace(/\s/g, '-').toLowerCase()}`;
+        return `
+            <div class="kpi-card ${colorClass}">
+                <div class="kpi-label">${label}</div>
+                <div class="kpi-value">${value}</div>
+                <div class="kpi-delta ${d.cls}">${d.text}</div>
+                ${historyKey ? `<div class="kpi-sparkline"><canvas id="${sparkId}"></canvas></div>` : ''}
+            </div>`;
+    }
+
+    function makeMetricMini(label, value, delta, suffix) {
+        const d = delta != null ? fmt.deltaRaw(delta, suffix || '') : null;
+        return `
+            <div class="metric-mini">
+                <div class="metric-mini-label">${label}</div>
+                <div class="metric-mini-value">${value}</div>
+                ${d ? `<div class="metric-mini-delta" style="color:${d.cls === 'up' ? 'var(--green)' : d.cls === 'down' ? 'var(--red)' : 'var(--gray)'}">${d.text}</div>` : ''}
+            </div>`;
+    }
+
+    function makeSparkline(canvasId, data, color) {
+        const canvas = document.getElementById(canvasId);
+        if (!canvas || !data || data.length < 2) return;
+        new Chart(canvas, {
+            type: 'line',
+            data: {
+                labels: data.map((_, i) => i),
+                datasets: [{ data, borderColor: color, borderWidth: 2, pointRadius: 0, tension: 0.4, fill: false }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                scales: { x: { display: false }, y: { display: false } },
+                animation: false
+            }
+        });
+    }
+
+    function createChart(id, config) {
+        if (chartInstances[id]) chartInstances[id].destroy();
+        const ctx = document.getElementById(id);
+        if (!ctx) return;
+        chartInstances[id] = new Chart(ctx, config);
+    }
+
+    const CHART_COLORS = {
+        amazon: '#27AE60', dtc: '#E67E22', klaviyo: '#3498DB',
+        subs: '#9B59B6', paid: '#E74C3C', total: '#2E75B6',
+        google: '#4285F4', meta: '#1877F2', margin: '#8E44AD',
+        tacos: '#F39C12', acos: '#E74C3C', roas: '#27AE60',
+        ig: '#E1306C', tiktok: '#000000',
+    };
+
+    const baseChartOpts = {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+            legend: { position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle', padding: 16, font: { size: 11, weight: '600' } } },
+            tooltip: { backgroundColor: '#2D3436', titleFont: { size: 12 }, bodyFont: { size: 12 }, padding: 10, cornerRadius: 6 }
+        },
+        scales: {
+            x: { grid: { display: false }, ticks: { font: { size: 11 } } },
+            y: { grid: { color: '#F0F0F0' }, ticks: { font: { size: 11 } } }
+        }
+    };
+
+    // ============================================================
+    // RENDER ALL
+    // ============================================================
+    function renderAll() {
+        renderHeader();
+        renderOverview();
+        renderAmazon();
+        renderDTC();
+        renderKlaviyo();
+        renderPaid();
+        renderSubsSocial();
+    }
+
+    // ============================================================
+    // HEADER
+    // ============================================================
+    function renderHeader() {
+        document.getElementById('headerDate').textContent = DATA.meta.dateRange;
+        const badges = document.getElementById('sourceBadges');
+        const sources = DATA.meta.sources;
+        const sourceLabels = { cassie: "Cassie's Recap", stella: 'Stella Rising', klaviyo: 'Klaviyo API' };
+        badges.innerHTML = Object.entries(sources).map(([key, src]) =>
+            `<span class="source-badge ${src.status}">${sourceLabels[key]}: ${src.status === 'ok' ? 'OK' : src.status}</span>`
+        ).join('');
+    }
+
+    // ============================================================
+    // OVERVIEW TAB
+    // ============================================================
+    function renderOverview() {
+        const d = DATA;
+        const h = HISTORY;
+        const weeks = h.map(w => w.week);
+
+        // KPI Cards
+        document.getElementById('overviewKpis').innerHTML = [
+            makeKpiCard('Total Revenue', fmt.usd(d.summary.totalRevenue), d.summary.totalRevenueWoW, 'total', 'totalRevenue'),
+            makeKpiCard('Amazon', fmt.usd(d.amazon.grossRevenue), d.amazon.grossRevenueWoW, 'amazon', 'amazon'),
+            makeKpiCard('DTC', fmt.usd(d.dtc.revenue), d.dtc.revenueWoW, 'dtc', 'dtc'),
+            makeKpiCard('Email / Klaviyo', fmt.usd(d.klaviyo.totalEmailRevenue), d.klaviyo.emailRevenueWoW, 'klaviyo', 'klaviyo'),
+            makeKpiCard('Subscriptions', fmt.usd(d.subscriptions.subscriptionRevenue), { text: 'Net ' + (d.subscriptions.netChange >= 0 ? '+' : '') + d.subscriptions.netChange + ' subs', cls: d.subscriptions.netChange >= 0 ? 'up' : 'down' }, 'subs', 'subscriptions'),
+            makeKpiCard('Meta Ads', fmt.usd(d.paidMedia.meta.spend) + ' spend', { text: fmt.x(d.paidMedia.meta.roas) + ' ROAS', cls: d.paidMedia.meta.roas >= 2.0 ? 'up' : 'down' }, 'paid', 'paidSpend'),
+        ].join('');
+
+        // Sparklines
+        setTimeout(() => {
+            makeSparkline('spark-total-revenue', h.map(w => w.totalRevenue), CHART_COLORS.total);
+            makeSparkline('spark-amazon', h.map(w => w.amazon), CHART_COLORS.amazon);
+            makeSparkline('spark-dtc', h.map(w => w.dtc), CHART_COLORS.dtc);
+            makeSparkline('spark-email-/-klaviyo', h.map(w => w.klaviyo), CHART_COLORS.klaviyo);
+            makeSparkline('spark-subscriptions', h.map(w => w.subscriptions), CHART_COLORS.subs);
+            makeSparkline('spark-meta-ads', h.map(w => w.metaRoas), CHART_COLORS.paid);
+        }, 50);
+
+        // Signals
+        document.getElementById('signalsList').innerHTML = d.summary.signals.map(s =>
+            `<div class="signal-card ${s.level}"><div class="dot"></div><div><span class="signal-channel">${s.channel}:</span> ${s.text}</div></div>`
+        ).join('');
+
+        // Guardrails
+        const g = d.guardrails;
+        const guardrailItems = [
+            { label: 'Amazon Net Margin', value: fmt.pct(g.amazonMargin.value), target: 'target &ge;30%', pass: g.amazonMargin.pass },
+            { label: 'TACOS', value: fmt.pct(g.tacos.value), target: 'target &le;8.3%', pass: g.tacos.pass },
+            { label: 'DTC CVR', value: fmt.pct(g.dtcCVR.value), target: 'target &ge;2.0%', pass: g.dtcCVR.pass },
+            { label: 'DTC AOV', value: fmt.usdDec(g.dtcAOV.value), target: 'target &ge;$30', pass: g.dtcAOV.pass },
+            { label: 'Sub Net Change', value: g.subNetChange.value >= 0 ? '+' + g.subNetChange.value : '' + g.subNetChange.value, target: 'target: positive', pass: g.subNetChange.pass },
+            { label: 'Meta ROAS', value: fmt.x(g.metaRoas.value), target: 'target &ge;3.5x', pass: g.metaRoas.pass },
+            { label: 'DTC MER', value: g.dtcMER.pending ? g.dtcMER.note : fmt.x(g.dtcMER.value), target: '', pending: g.dtcMER.pending },
+            { label: 'Social Posts', value: g.socialPosts.pending ? g.socialPosts.note : g.socialPosts.value + ' posts', target: 'target: 18/month', pending: g.socialPosts.pending },
+        ];
+        document.getElementById('guardrailsList').innerHTML = guardrailItems.map(item => {
+            const icon = item.pending ? '&#9203;' : item.pass ? '&#9989;' : '&#9888;';
+            return `<div class="guardrail-item">
+                <span class="guardrail-icon">${icon}</span>
+                <span class="guardrail-label">${item.label}</span>
+                <span class="guardrail-value">${item.value}</span>
+                <span class="guardrail-target">${item.target}</span>
+            </div>`;
+        }).join('');
+
+        // Watch Items
+        document.getElementById('watchList').innerHTML = d.summary.watchItems.map((item, i) =>
+            `<div class="watch-item">
+                <div class="watch-number">${i + 1}</div>
+                <div class="watch-content">
+                    <div class="watch-action">${item.action}</div>
+                    <div class="watch-why">${item.why}</div>
+                </div>
+            </div>`
+        ).join('');
+
+        // Revenue Trend Chart
+        createChart('revenueTrendChart', {
+            type: 'line',
+            data: {
+                labels: weeks,
+                datasets: [{
+                    label: 'Total Revenue', data: h.map(w => w.totalRevenue),
+                    borderColor: CHART_COLORS.total, backgroundColor: CHART_COLORS.total + '15',
+                    borderWidth: 3, pointRadius: 4, pointHoverRadius: 6, tension: 0.3, fill: true
+                }]
+            },
+            options: { ...baseChartOpts, scales: { ...baseChartOpts.scales, y: { ...baseChartOpts.scales.y, ticks: { ...baseChartOpts.scales.y.ticks, callback: v => '$' + (v / 1000).toFixed(0) + 'K' } } } }
+        });
+
+        // Stacked Revenue Chart
+        createChart('revenueStackedChart', {
+            type: 'bar',
+            data: {
+                labels: weeks,
+                datasets: [
+                    { label: 'Amazon', data: h.map(w => w.amazon), backgroundColor: CHART_COLORS.amazon, borderRadius: 3 },
+                    { label: 'DTC', data: h.map(w => w.dtc), backgroundColor: CHART_COLORS.dtc, borderRadius: 3 },
+                    { label: 'Klaviyo', data: h.map(w => w.klaviyo), backgroundColor: CHART_COLORS.klaviyo, borderRadius: 3 },
+                ]
+            },
+            options: { ...baseChartOpts, scales: { ...baseChartOpts.scales, x: { ...baseChartOpts.scales.x, stacked: true }, y: { ...baseChartOpts.scales.y, stacked: true, ticks: { ...baseChartOpts.scales.y.ticks, callback: v => '$' + (v / 1000).toFixed(0) + 'K' } } } }
+        });
+    }
+
+    // ============================================================
+    // AMAZON TAB
+    // ============================================================
+    function renderAmazon() {
+        const a = DATA.amazon;
+        const h = HISTORY;
+
+        document.getElementById('amazonMetrics').innerHTML = [
+            makeMetricMini('Gross Revenue', fmt.usd(a.grossRevenue), a.grossRevenueWoW, '%'),
+            makeMetricMini('Net Profit', fmt.usd(a.netProfit), a.netProfitWoW, '%'),
+            makeMetricMini('Net Margin', fmt.pct(a.netMargin), a.netMarginWoW, 'pp'),
+            makeMetricMini('TACOS', fmt.pct(a.tacos), a.tacosWoW, 'pp'),
+            makeMetricMini('Ad Spend', fmt.usd(a.adSpend), a.adSpendWoW, '%'),
+            makeMetricMini('Organic Rev', fmt.usd(a.organicRevenue) + ' (' + a.organicPct + '%)', null),
+            makeMetricMini('PPC Rev', fmt.usd(a.ppcRevenue) + ' (' + a.ppcPct + '%)', null),
+            makeMetricMini('Orders', fmt.num(a.orders), null),
+            makeMetricMini('Units', fmt.num(a.units), null),
+        ].join('');
+
+        // Corridor marker position (based on margin: 25-40% maps to 0-100%)
+        const marker = document.getElementById('corridorMarker');
+        let pct;
+        if (a.netMargin < 25) pct = (a.netMargin / 25) * 33.3;
+        else if (a.netMargin < 30) pct = 33.3 + ((a.netMargin - 25) / 5) * 33.3;
+        else pct = 66.6 + ((Math.min(a.netMargin, 40) - 30) / 10) * 33.3;
+        marker.style.left = `${pct}%`;
+        marker.dataset.label = `${a.corridor} (${fmt.pct(a.netMargin)} margin)`;
+
+        // Revenue chart
+        createChart('amazonRevChart', {
+            type: 'line',
+            data: {
+                labels: h.map(w => w.week),
+                datasets: [{ label: 'Amazon Revenue', data: h.map(w => w.amazon), borderColor: CHART_COLORS.amazon, backgroundColor: CHART_COLORS.amazon + '15', borderWidth: 2.5, pointRadius: 4, tension: 0.3, fill: true }]
+            },
+            options: { ...baseChartOpts, scales: { ...baseChartOpts.scales, y: { ...baseChartOpts.scales.y, ticks: { ...baseChartOpts.scales.y.ticks, callback: v => '$' + (v / 1000).toFixed(0) + 'K' } } } }
+        });
+
+        // TACOS & Margin chart
+        createChart('amazonTacosChart', {
+            type: 'line',
+            data: {
+                labels: h.map(w => w.week),
+                datasets: [
+                    { label: 'TACOS %', data: h.map(w => w.tacos), borderColor: CHART_COLORS.tacos, borderWidth: 2.5, pointRadius: 4, tension: 0.3, yAxisID: 'y' },
+                    { label: 'Margin %', data: h.map(w => w.amazonMargin || 0), borderColor: CHART_COLORS.margin, borderWidth: 2.5, pointRadius: 4, tension: 0.3, yAxisID: 'y1' }
+                ]
+            },
+            options: {
+                ...baseChartOpts,
+                scales: {
+                    x: baseChartOpts.scales.x,
+                    y: { ...baseChartOpts.scales.y, position: 'left', title: { display: true, text: 'TACOS %', font: { size: 11 } } },
+                    y1: { ...baseChartOpts.scales.y, position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'Margin %', font: { size: 11 } } }
+                }
+            }
+        });
+
+        // ASIN table
+        const tbody = document.querySelector('#asinTable tbody');
+        if (a.topAsins && a.topAsins.length) {
+            tbody.innerHTML = a.topAsins.map(asin =>
+                `<tr><td>${asin.name}</td><td class="num">${fmt.usd(asin.revenue)}</td><td class="num">${fmt.num(asin.units)}</td><td class="num">${fmt.pct(asin.acos)}</td></tr>`
+            ).join('');
+        } else {
+            tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#6C7A89;padding:20px">Product-level breakdown not available this period</td></tr>';
+        }
+    }
+
+    // ============================================================
+    // DTC TAB
+    // ============================================================
+    function renderDTC() {
+        const d = DATA.dtc;
+        const h = HISTORY;
+
+        document.getElementById('dtcMetrics').innerHTML = [
+            makeMetricMini('Revenue', fmt.usd(d.revenue), d.revenueWoW, '%'),
+            makeMetricMini('AOV', fmt.usdDec(d.aov), d.aovWoW, '%'),
+            makeMetricMini('CVR', fmt.pct(d.conversionRate), d.conversionRateWoW, 'pp'),
+            makeMetricMini('Sessions', fmt.num(d.sessions), null),
+            makeMetricMini('New Customer Rev', fmt.usd(d.newCustomerRevenue) + ' (' + d.newCustomerPct + '%)', null),
+            makeMetricMini('Returning Rev', fmt.usd(d.returningCustomerRevenue) + ' (' + d.returningCustomerPct + '%)', null),
+        ].join('');
+
+        createChart('dtcRevChart', {
+            type: 'line',
+            data: {
+                labels: h.map(w => w.week),
+                datasets: [{ label: 'DTC Revenue', data: h.map(w => w.dtc), borderColor: CHART_COLORS.dtc, backgroundColor: CHART_COLORS.dtc + '15', borderWidth: 2.5, pointRadius: 4, tension: 0.3, fill: true }]
+            },
+            options: { ...baseChartOpts, scales: { ...baseChartOpts.scales, y: { ...baseChartOpts.scales.y, ticks: { ...baseChartOpts.scales.y.ticks, callback: v => '$' + (v / 1000).toFixed(0) + 'K' } } } }
+        });
+
+        createChart('dtcAovChart', {
+            type: 'line',
+            data: {
+                labels: h.map(w => w.week),
+                datasets: [
+                    { label: 'AOV', data: h.map(w => w.aov), borderColor: CHART_COLORS.dtc, borderWidth: 2.5, pointRadius: 4, tension: 0.3, yAxisID: 'y' },
+                    { label: 'CVR %', data: h.map(w => w.dtcCvr), borderColor: CHART_COLORS.total, borderWidth: 2.5, pointRadius: 4, tension: 0.3, yAxisID: 'y1' }
+                ]
+            },
+            options: {
+                ...baseChartOpts,
+                scales: {
+                    x: baseChartOpts.scales.x,
+                    y: { ...baseChartOpts.scales.y, position: 'left', title: { display: true, text: 'AOV ($)', font: { size: 11 } }, ticks: { ...baseChartOpts.scales.y.ticks, callback: v => '$' + v } },
+                    y1: { ...baseChartOpts.scales.y, position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'CVR %', font: { size: 11 } } }
+                }
+            }
+        });
+    }
+
+    // ============================================================
+    // KLAVIYO TAB
+    // ============================================================
+    function renderKlaviyo() {
+        const k = DATA.klaviyo;
+        const d = DATA.dtc;
+        const h = HISTORY;
+
+        document.getElementById('klaviyoMetrics').innerHTML = [
+            makeMetricMini('Total Email Rev', fmt.usd(k.totalEmailRevenue), k.emailRevenueWoW, '%'),
+            makeMetricMini('Campaign Revenue', fmt.usd(k.campaignRevenue), null),
+            makeMetricMini('Flow Revenue', fmt.usd(k.flowRevenue), null),
+            makeMetricMini('% of DTC', fmt.pct(k.emailRevenueAsPctDTC), null),
+            makeMetricMini('Klaviyo Net New', '+' + fmt.num(k.listGrowthNet), null),
+        ].join('');
+
+        // Donut
+        createChart('emailDonutChart', {
+            type: 'doughnut',
+            data: {
+                labels: ['Campaign Revenue', 'Flow Revenue'],
+                datasets: [{ data: [k.campaignRevenue, k.flowRevenue], backgroundColor: ['#3498DB', '#2E75B6'], borderWidth: 2, borderColor: '#fff' }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, cutout: '65%' }
+        });
+        document.getElementById('emailDonutLegend').innerHTML = `
+            <div class="donut-legend-item"><div class="donut-legend-dot" style="background:#3498DB"></div>Campaigns: ${fmt.usd(k.campaignRevenue)}</div>
+            <div class="donut-legend-item"><div class="donut-legend-dot" style="background:#2E75B6"></div>Flows: ${fmt.usd(k.flowRevenue)}</div>
+            <div class="donut-legend-item" style="font-weight:700;margin-top:4px">Total: ${fmt.usd(k.totalEmailRevenue)}</div>
+            <div class="donut-legend-item" style="color:#6C7A89">${fmt.pct(k.emailRevenueAsPctDTC)} of DTC revenue</div>
+        `;
+
+        // Trend
+        createChart('emailRevChart', {
+            type: 'line',
+            data: {
+                labels: h.map(w => w.week),
+                datasets: [{ label: 'Email Revenue', data: h.map(w => w.klaviyo), borderColor: CHART_COLORS.klaviyo, backgroundColor: CHART_COLORS.klaviyo + '15', borderWidth: 2.5, pointRadius: 4, tension: 0.3, fill: true }]
+            },
+            options: { ...baseChartOpts, scales: { ...baseChartOpts.scales, y: { ...baseChartOpts.scales.y, ticks: { ...baseChartOpts.scales.y.ticks, callback: v => '$' + (v / 1000).toFixed(1) + 'K' } } } }
+        });
+
+        // Campaign table
+        document.querySelector('#campaignTable tbody').innerHTML = k.campaigns.map(c =>
+            `<tr><td>${c.name}</td><td class="num">${fmt.num(c.sent)}</td><td class="num">${fmt.pct(c.openRate)}</td><td class="num">${fmt.pct(c.clickRate)}</td><td class="num">${fmt.usd(c.revenue)}</td></tr>`
+        ).join('');
+
+        // Flow table
+        document.querySelector('#flowTable tbody').innerHTML = k.flows.map(f =>
+            `<tr><td>${f.name}</td><td class="num">${fmt.pct(f.openRate)}</td><td class="num">${fmt.pct(f.clickRate)}</td><td class="num">${fmt.usd(f.revenue)}</td></tr>`
+        ).join('');
+    }
+
+    // ============================================================
+    // PAID MEDIA TAB
+    // ============================================================
+    function renderPaid() {
+        const p = DATA.paidMedia;
+        const m = p.meta;
+        const h = HISTORY;
+
+        document.getElementById('paidMetrics').innerHTML = [
+            makeMetricMini('Meta Spend', fmt.usd(m.spend), null),
+            makeMetricMini('Meta ROAS', fmt.x(m.roas), null),
+            makeMetricMini('Purchases', fmt.num(m.purchases), null),
+            makeMetricMini('Cost/Purchase', fmt.usdDec(m.costPerPurchase), null),
+        ].join('');
+
+        // Meta spend vs revenue bar
+        createChart('paidCompareChart', {
+            type: 'bar',
+            data: {
+                labels: ['Meta Ads'],
+                datasets: [
+                    { label: 'Spend', data: [m.spend], backgroundColor: '#E74C3C', borderRadius: 4 },
+                    { label: 'Revenue', data: [m.revenue], backgroundColor: '#27AE60', borderRadius: 4 }
+                ]
+            },
+            options: { ...baseChartOpts, indexAxis: 'y', scales: { x: { ...baseChartOpts.scales.x, ticks: { callback: v => '$' + (v / 1000).toFixed(1) + 'K' } }, y: { ...baseChartOpts.scales.y } } }
+        });
+
+        // ROAS trend (Meta only for now; Google will come from Stella Rising)
+        createChart('roasTrendChart', {
+            type: 'line',
+            data: {
+                labels: h.map(w => w.week),
+                datasets: [
+                    { label: 'Meta ROAS', data: h.map(w => w.metaRoas), borderColor: CHART_COLORS.meta, borderWidth: 2.5, pointRadius: 4, tension: 0.3 },
+                    { label: 'Target (3.5x)', data: h.map(() => 3.5), borderColor: '#E74C3C', borderWidth: 1, borderDash: [4, 4], pointRadius: 0 }
+                ]
+            },
+            options: { ...baseChartOpts, scales: { ...baseChartOpts.scales, y: { ...baseChartOpts.scales.y, title: { display: true, text: 'ROAS', font: { size: 11 } }, ticks: { ...baseChartOpts.scales.y.ticks, callback: v => v.toFixed(1) + 'x' } } } }
+        });
+
+        // Google detail metrics — pending from Stella Rising PDF
+        const googleNote = p.google && p.google.note ? p.google.note : 'Data pending';
+        document.getElementById('googleMetrics').innerHTML = `<div style="text-align:center;color:#6C7A89;padding:20px;grid-column:1/-1"><span class="pending-badge">Pending</span> ${googleNote}</div>`;
+
+        // Meta detail metrics
+        document.getElementById('metaMetrics').innerHTML = [
+            makeMetricMini('Spend', fmt.usd(m.spend), null),
+            makeMetricMini('Impressions', fmt.num(m.impressions), null),
+            makeMetricMini('Reach', fmt.num(m.reach), null),
+            makeMetricMini('Clicks', fmt.num(m.clicks), null),
+            makeMetricMini('CPC', fmt.usdDec(m.cpc), null),
+            makeMetricMini('CTR', fmt.pct(m.ctr), null),
+            makeMetricMini('CPM', fmt.usdDec(m.cpm), null),
+            makeMetricMini('ROAS', fmt.x(m.roas), null),
+            makeMetricMini('Purchases', fmt.num(m.purchases), null),
+        ].join('');
+    }
+
+    // ============================================================
+    // SUBS & SOCIAL TAB
+    // ============================================================
+    function renderSubsSocial() {
+        const s = DATA.subscriptions;
+        const soc = DATA.social;
+        const ga = DATA.ga4;
+        const h = HISTORY;
+
+        document.getElementById('subsMetrics').innerHTML = [
+            makeMetricMini('Active Subs', fmt.num(s.activeSubscriptions), null),
+            makeMetricMini('Subscribers', fmt.num(s.activeSubscribers), null),
+            makeMetricMini('New', '+' + s.newThisWeek, null),
+            makeMetricMini('Canceled', '-' + s.canceledThisWeek, null),
+            makeMetricMini('Net Change', (s.netChange >= 0 ? '+' : '') + s.netChange, s.netChangeWoW, ''),
+            makeMetricMini('Sub Revenue', fmt.usd(s.subscriptionRevenue), null),
+            makeMetricMini('First Orders', fmt.usd(s.firstOrderRevenue), null),
+            makeMetricMini('Recurring', fmt.usd(s.recurringRevenue), null),
+            makeMetricMini('Klaviyo Net New', '+' + s.klaviyoNetNew, null),
+        ].join('');
+
+        // Subscribers trend
+        createChart('subsChart', {
+            type: 'line',
+            data: {
+                labels: h.map(w => w.week),
+                datasets: [{ label: 'Active Subscriptions', data: h.map(w => w.activeSubscriptions), borderColor: CHART_COLORS.subs, backgroundColor: CHART_COLORS.subs + '15', borderWidth: 2.5, pointRadius: 4, tension: 0.3, fill: true }]
+            },
+            options: baseChartOpts
+        });
+
+        // Social followers + engagement trend
+        createChart('socialChart', {
+            type: 'line',
+            data: {
+                labels: h.map(w => w.week),
+                datasets: [
+                    { label: 'IG Followers', data: h.map(w => w.igFollowers), borderColor: CHART_COLORS.ig, borderWidth: 2.5, pointRadius: 4, tension: 0.3, yAxisID: 'y' },
+                    { label: 'Engagement', data: h.map(w => w.igEngagement), borderColor: CHART_COLORS.social, borderWidth: 2.5, pointRadius: 4, tension: 0.3, yAxisID: 'y1' }
+                ]
+            },
+            options: {
+                ...baseChartOpts,
+                scales: {
+                    x: baseChartOpts.scales.x,
+                    y: { ...baseChartOpts.scales.y, position: 'left', title: { display: true, text: 'Followers', font: { size: 11 } } },
+                    y1: { ...baseChartOpts.scales.y, position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'Engagement', font: { size: 11 } } }
+                }
+            }
+        });
+
+        // Social metrics
+        const ig = soc.instagram;
+        document.getElementById('socialMetrics').innerHTML = [
+            makeMetricMini('IG Followers', fmt.num(ig.followers), null),
+            makeMetricMini('Follower Growth', '+' + ig.followersWoW, null),
+            makeMetricMini('Posts', ig.postsPublished, null),
+            makeMetricMini('Engagement', fmt.num(ig.totalEngagement), ig.engagementWoW, '%'),
+            makeMetricMini('Reach', fmt.num(ig.reach), ig.reachWoW, '%'),
+            makeMetricMini('Posts MTD', soc.postsMonthToDate + ' / ' + soc.postsMonthTarget, null),
+        ].join('');
+
+        // GA4 metrics
+        document.getElementById('ga4Metrics').innerHTML = [
+            makeMetricMini('Sessions', fmt.num(ga.sessions), ga.sessionsWoW, '%'),
+            makeMetricMini('Users', fmt.num(ga.totalUsers), null),
+            makeMetricMini('New Users', fmt.num(ga.newUsers), null),
+            makeMetricMini('Page Views', fmt.num(ga.pageViews), null),
+            makeMetricMini('Bounce Rate', fmt.pct(ga.bounceRate), ga.bounceRateWoW, 'pp'),
+            makeMetricMini('CVR', fmt.pct(ga.conversionRate), ga.conversionRateWoW, 'pp'),
+            makeMetricMini('Conversions', fmt.num(ga.conversions), null),
+            makeMetricMini('Avg Duration', ga.avgSessionDuration + 's', null),
+        ].join('');
+
+        // Top pages table
+        document.querySelector('#pagesTable tbody').innerHTML = ga.topPages.map(p =>
+            `<tr><td>${p.page}</td><td class="num">${fmt.num(p.sessions)}</td><td class="num">${p.conversionRate ? fmt.pct(p.conversionRate) : '—'}</td></tr>`
+        ).join('');
+    }
+
+    // ============================================================
+    // TAB SWITCHING
+    // ============================================================
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('tab-' + tabId).classList.add('active');
+        event.target.classList.add('active');
+    }
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', loadData);
+    </script>
+</body>
+</html>

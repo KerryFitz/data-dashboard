@@ -1,0 +1,198 @@
+{
+  "meta": {
+    "week": "W14",
+    "year": 2026,
+    "dateRange": "Mar 31 – Apr 06, 2026",
+    "generatedAt": "2026-04-07T18:00:00Z",
+    "sources": {
+      "cassie": { "status": "ok", "date": "2026-04-06" },
+      "stella": { "status": "ok", "date": "2026-04-06" },
+      "klaviyo": { "status": "ok", "date": "2026-04-07" }
+    }
+  },
+  "summary": {
+    "totalRevenue": 101917,
+    "totalRevenueWoW": -9.8,
+    "signals": [
+      { "level": "green", "channel": "Amazon", "text": "TACOS at 2.2% and margin at 38.6% — healthy organic demand despite -12% revenue dip. Natural pullback, not structural." },
+      { "level": "green", "channel": "Klaviyo", "text": "Email driving 28.4% of DTC revenue ($6,608) — up 5.4% WoW. Strong owned-channel performance reducing paid dependency." },
+      { "level": "yellow", "channel": "Meta Ads", "text": "ROAS at 1.0x, near breakeven. Evergreen prospecting campaign at 0.6x ROAS — consider pausing or retargeting." },
+      { "level": "yellow", "channel": "Social", "text": "Engagement down 38.5% WoW with only 3 posts published. Volume issue, not content quality — need to increase posting cadence." },
+      { "level": "red", "channel": "GA4", "text": "Sessions down 12.7% WoW to 14,787. Traffic decline across most sources; paid search and social contributing minimal volume." }
+    ],
+    "watchItems": [
+      { "action": "Audit Meta Ads prospecting campaign", "why": "BWM Prospecting at 0.6x ROAS ($571 spend, $323 rev) — pause or reallocate to Advantage+ which runs 1.2x" },
+      { "action": "Increase social posting cadence", "why": "Only 3 posts this week drove 38.5% engagement drop — aim for 5+ posts/week to maintain reach" },
+      { "action": "Investigate GA4 session decline", "why": "14,787 sessions (-12.7% WoW) — direct traffic down significantly, check if site speed or SEO issue" },
+      { "action": "Monitor Amazon revenue recovery", "why": "$78.7K (-11.8% WoW) likely a natural pullback, but watch for 2+ weeks of decline" }
+    ]
+  },
+  "amazon": {
+    "grossRevenue": 78683,
+    "grossRevenueWoW": -11.8,
+    "netProfit": 30411,
+    "netProfitWoW": -19.0,
+    "netMargin": 38.6,
+    "netMarginWoW": -3.5,
+    "tacos": 2.2,
+    "tacosWoW": -1.1,
+    "adSpend": 1731,
+    "adSpendWoW": -40.6,
+    "organicRevenue": 75153,
+    "organicPct": 95.5,
+    "ppcRevenue": 3530,
+    "ppcPct": 4.5,
+    "orders": 3623,
+    "units": 3780,
+    "corridor": "Scale",
+    "status": "green"
+  },
+  "dtc": {
+    "revenue": 23233,
+    "revenueWoW": -4.8,
+    "newCustomerRevenue": 9936,
+    "newCustomerPct": 42.8,
+    "returningCustomerRevenue": 13298,
+    "returningCustomerPct": 57.2,
+    "emailKlaviyoTotal": 6608,
+    "emailKlaviyoPctDTC": 28.4,
+    "emailKlaviyoWoW": 5.4,
+    "campaignRevenue": 4815,
+    "flowRevenue": 1793,
+    "subscriptionRevenue": 4942,
+    "subscriptionPctDTC": 21.3,
+    "aov": 30.83,
+    "trueAov": 30.21,
+    "aovWoW": -2.7,
+    "conversionRate": 2.6,
+    "conversionRateWoW": 0.6,
+    "sessions": 15239,
+    "bounceRate": 86.6,
+    "status": "yellow"
+  },
+  "subscriptions": {
+    "activeSubscriptions": 4091,
+    "activeSubscribers": 2182,
+    "newThisWeek": 79,
+    "canceledThisWeek": 79,
+    "churnedSubscribers": 38,
+    "reactivated": 3,
+    "netChange": 0,
+    "netChangeWoW": 11,
+    "subscriptionRevenue": 4942,
+    "firstOrderRevenue": 1312,
+    "recurringRevenue": 3630,
+    "klaviyoNewSubscribers": 441,
+    "klaviyoUnsubscribed": 247,
+    "klaviyoNetNew": 194,
+    "status": "yellow"
+  },
+  "social": {
+    "instagram": {
+      "followers": 78509,
+      "followersWoW": 72,
+      "postsPublished": 3,
+      "totalEngagement": 67,
+      "engagementWoW": -38.5,
+      "reach": 86037,
+      "reachWoW": -4.5,
+      "likes": 64,
+      "comments": 3,
+      "postBreakdown": [
+        { "type": "CAROUSEL_ALBUM", "posts": 2, "engagement": 48, "avgPerPost": 24 },
+        { "type": "VIDEO", "posts": 1, "engagement": 19, "avgPerPost": 19 }
+      ],
+      "topPost": {
+        "likes": 34,
+        "comments": 2,
+        "caption": "Our invigorating Energize scents are bright, citrus-forward and here to wake up...",
+        "url": "https://www.instagram.com/p/DWpSnOQmMLS/"
+      }
+    },
+    "postsMonthToDate": 3,
+    "postsMonthTarget": 18,
+    "status": "yellow"
+  },
+  "paidMedia": {
+    "meta": {
+      "spend": 2394,
+      "impressions": 178950,
+      "reach": 104939,
+      "clicks": 3074,
+      "cpc": 0.78,
+      "ctr": 1.72,
+      "cpm": 13.38,
+      "frequency": 1.71,
+      "purchases": 75,
+      "revenue": 2499,
+      "roas": 1.0,
+      "costPerPurchase": 31.92,
+      "campaigns": [
+        { "name": "BWM | Evergreen | Combined | Sales | Open Targeting, RTG | Advantage+", "spend": 1824, "purchases": 65, "revenue": 2176, "roas": 1.2 },
+        { "name": "BWM | Evergreen | Prospecting | Sales | Interests + LAL", "spend": 571, "purchases": 10, "revenue": 323, "roas": 0.6 }
+      ]
+    },
+    "google": {
+      "spend": null,
+      "roas": null,
+      "note": "Data in Stella Rising PDF attachment — see weekly report"
+    },
+    "totalSpend": 2394,
+    "totalSpendNote": "Meta only; Google Ads data pending Stella Rising report parsing",
+    "blendedRoas": 1.0,
+    "status": "red"
+  },
+  "ga4": {
+    "sessions": 14787,
+    "sessionsWoW": -12.7,
+    "totalUsers": 13568,
+    "newUsers": 12951,
+    "pageViews": 38402,
+    "bounceRate": 29.7,
+    "bounceRateWoW": -1.7,
+    "conversions": 291,
+    "conversionRate": 1.97,
+    "conversionRateWoW": 0.3,
+    "avgSessionDuration": 79,
+    "trafficSources": [
+      { "source": "Direct", "sessions": 9990, "pct": 67.6 },
+      { "source": "Organic Search", "sessions": 2102, "pct": 14.2 },
+      { "source": "Paid Search", "sessions": 871, "pct": 5.9 },
+      { "source": "Email", "sessions": 454, "pct": 3.1 },
+      { "source": "Paid Social", "sessions": 307, "pct": 2.1 },
+      { "source": "Cross-network", "sessions": 269, "pct": 1.8 },
+      { "source": "Referral", "sessions": 203, "pct": 1.4 },
+      { "source": "Organic Shopping", "sessions": 137, "pct": 0.9 },
+      { "source": "Organic Social", "sessions": 79, "pct": 0.5 }
+    ],
+    "topPages": [
+      { "page": "/products/aluminum-free-deodorant", "sessions": 5571 },
+      { "page": "/", "sessions": 2224 },
+      { "page": "/collections/all", "sessions": 1248 },
+      { "page": "/products/moisturizing-bar-soap", "sessions": 842 },
+      { "page": "/products/hydrating-lip-balm", "sessions": 611 }
+    ],
+    "status": "red"
+  },
+  "guardrails": {
+    "amazonMargin": { "value": 38.6, "target": 30.0, "pass": true },
+    "tacos": { "value": 2.2, "target": 8.3, "pass": true },
+    "dtcCVR": { "value": 2.6, "target": 2.0, "pass": true },
+    "dtcAOV": { "value": 30.83, "target": 30.0, "pass": true },
+    "subNetChange": { "value": 0, "target": 0, "pass": true },
+    "metaRoas": { "value": 1.0, "target": 3.5, "pass": false },
+    "dtcMER": { "value": null, "target": null, "pending": true, "note": "Pending Google Ads data" },
+    "socialPosts": { "value": 3, "target": 18, "pending": true, "note": "3 of 18 month target" }
+  },
+  "klaviyo": {
+    "totalEmailRevenue": 6608,
+    "emailRevenueWoW": 5.4,
+    "emailRevenueAsPctDTC": 28.4,
+    "campaignRevenue": 4815,
+    "flowRevenue": 1793,
+    "campaigns": [],
+    "flows": [],
+    "listGrowthNet": 194,
+    "status": "green"
+  }
+}
