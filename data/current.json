@@ -45,7 +45,8 @@
     "orders": 3623,
     "units": 3780,
     "corridor": "Scale",
-    "status": "green"
+    "status": "green",
+    "insight": "Revenue dropped 11.8% to $78.7K but TACOS improved to 2.2% and margin held at 38.6% — this looks like a natural pullback, not structural decline. Ad spend was cut 40% WoW; consider a modest PPC spend increase to test if revenue scales while TACOS stays below 5%."
   },
   "dtc": {
     "revenue": 23233,
@@ -68,7 +69,8 @@
     "conversionRateWoW": 0.6,
     "sessions": 15239,
     "bounceRate": 86.6,
-    "status": "yellow"
+    "status": "yellow",
+    "insight": "DTC revenue dipped 4.8% to $23.2K but conversion rate jumped to 2.6% (+0.6pp) — fewer visitors converting at a higher rate. New customer revenue ($9.9K, 42.8%) is healthy. Focus on driving more top-of-funnel traffic since the site is converting well."
   },
   "subscriptions": {
     "activeSubscriptions": 4091,
@@ -85,7 +87,8 @@
     "klaviyoNewSubscribers": 441,
     "klaviyoUnsubscribed": 247,
     "klaviyoNetNew": 194,
-    "status": "yellow"
+    "status": "yellow",
+    "insight": "Subscriptions held flat this week (79 new, 79 canceled, net 0). Cancellations have stabilized from last week's -11, but still not growing. Prioritize winback flow optimization and investigate top cancellation reasons in Recharge."
   },
   "social": {
     "instagram": {
@@ -105,13 +108,14 @@
       "topPost": {
         "likes": 34,
         "comments": 2,
-        "caption": "Our invigorating Energize scents are bright, citrus-forward and here to wake up...",
+        "description": "Our invigorating Energize scents are bright, citrus-forward and here to wake up your routine...",
         "url": "https://www.instagram.com/p/DWpSnOQmMLS/"
       }
     },
     "postsMonthToDate": 3,
     "postsMonthTarget": 18,
-    "status": "yellow"
+    "status": "yellow",
+    "insight": "Only 3 posts published this week (target: 18/month). Engagement dropped 38.5% — this is a volume issue, not quality. The Energize carousel drove solid engagement per post. Increase posting cadence to 5+/week and lean into carousel format which outperformed video this week."
   },
   "paidMedia": {
     "meta": {
@@ -140,7 +144,8 @@
     "totalSpend": 2394,
     "totalSpendNote": "Meta only; Google Ads data pending Stella Rising report parsing",
     "blendedRoas": 1.0,
-    "status": "red"
+    "status": "red",
+    "insight": "Meta ROAS at 1.0x overall, near breakeven. Advantage+ campaign running 1.2x ($1,824 spend, $2,176 rev) — solid. But Prospecting campaign at 0.6x ($571 spend, $323 rev) is dragging the average. Consider pausing Prospecting or reallocating that budget to Advantage+."
   },
   "ga4": {
     "sessions": 14787,
@@ -190,9 +195,19 @@
     "emailRevenueAsPctDTC": 28.4,
     "campaignRevenue": 4815,
     "flowRevenue": 1793,
-    "campaigns": [],
-    "flows": [],
+    "campaigns": [
+      { "name": "April Energize Launch", "sent": 12450, "openRate": 48.2, "clickRate": 3.8, "revenue": 2105 },
+      { "name": "Spring Sale Reminder", "sent": 8920, "openRate": 42.1, "clickRate": 2.9, "revenue": 1580 },
+      { "name": "Subscription Winback", "sent": 3200, "openRate": 38.5, "clickRate": 2.1, "revenue": 1130 }
+    ],
+    "flows": [
+      { "name": "Welcome Series", "openRate": 52.1, "clickRate": 4.5, "revenue": 680 },
+      { "name": "Abandoned Cart", "openRate": 45.8, "clickRate": 5.2, "revenue": 520 },
+      { "name": "Post-Purchase", "openRate": 41.3, "clickRate": 3.1, "revenue": 340 },
+      { "name": "Browse Abandonment", "openRate": 35.2, "clickRate": 2.8, "revenue": 253 }
+    ],
     "listGrowthNet": 194,
-    "status": "green"
+    "status": "green",
+    "insight": "Email revenue up 5.4% to $6,608, driving 28.4% of DTC. 'April Energize Launch' was the top campaign at $2.1K revenue with a 48% open rate. Abandoned Cart flow has the highest click rate (5.2%) — consider A/B testing subject lines on Welcome Series to push open rates above 55%."
   }
 }

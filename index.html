@@ -300,6 +300,54 @@
             padding: 2px 8px; border-radius: 10px;
             background: var(--yellow-bg); color: var(--yellow);
         }
+
+        .insight-card {
+            background: linear-gradient(135deg, var(--primary-light) 0%, #F0F7FF 100%);
+            border-left: 4px solid var(--primary);
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--dark-text);
+            display: none;
+        }
+        .insight-card .insight-label {
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+        .insight-card:not(:empty) { display: block; }
+
+        .top-post {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            padding: 12px 0;
+        }
+        .top-post-stats {
+            display: flex;
+            gap: 16px;
+            margin-top: 8px;
+            font-size: 13px;
+            color: #6C7A89;
+        }
+        .top-post-stats strong { color: var(--dark-text); }
+        .top-post-description {
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--dark-text);
+        }
+        .top-post a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .top-post a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -356,6 +404,7 @@
 
         <!-- ==================== AMAZON TAB ==================== -->
         <div class="tab-content" id="tab-amazon">
+            <div class="insight-card" id="amazonInsight"></div>
             <div class="metrics-row" id="amazonMetrics"></div>
 
             <div class="corridor-viz">
@@ -395,6 +444,7 @@
 
         <!-- ==================== DTC TAB ==================== -->
         <div class="tab-content" id="tab-dtc">
+            <div class="insight-card" id="dtcInsight"></div>
             <div class="metrics-row" id="dtcMetrics"></div>
 
             <div class="chart-row">
@@ -411,6 +461,7 @@
 
         <!-- ==================== KLAVIYO TAB ==================== -->
         <div class="tab-content" id="tab-klaviyo">
+            <div class="insight-card" id="klaviyoInsight"></div>
             <div class="metrics-row" id="klaviyoMetrics"></div>
 
             <div class="chart-row">
@@ -448,6 +499,7 @@
 
         <!-- ==================== PAID MEDIA TAB ==================== -->
         <div class="tab-content" id="tab-paid">
+            <div class="insight-card" id="paidInsight"></div>
             <div class="metrics-row" id="paidMetrics"></div>
 
             <div class="chart-row">
@@ -471,10 +523,19 @@
                     <div class="metrics-row" id="metaMetrics"></div>
                 </div>
             </div>
+
+            <div class="chart-card" id="paidCampaignCard" style="margin-bottom:28px;display:none">
+                <h3>Meta Campaign Breakdown</h3>
+                <table class="data-table" id="paidCampaignTable">
+                    <thead><tr><th>Campaign</th><th class="num">Spend</th><th class="num">Revenue</th><th class="num">ROAS</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
         </div>
 
         <!-- ==================== SUBS & SOCIAL TAB ==================== -->
         <div class="tab-content" id="tab-subs">
+            <div class="insight-card" id="subsInsight"></div>
             <div class="section-title" style="margin-bottom:16px">Subscriptions (Recharge)</div>
             <div class="metrics-row" id="subsMetrics"></div>
 
@@ -490,7 +551,13 @@
             </div>
 
             <div class="section-title" style="margin-bottom:16px">Social Media</div>
+            <div class="insight-card" id="socialInsight"></div>
             <div class="metrics-row" id="socialMetrics"></div>
+
+            <div class="chart-card" id="topPostCard" style="margin-top:20px;margin-bottom:20px;display:none">
+                <h3>Top Performing Post This Week</h3>
+                <div id="topPostContent"></div>
+            </div>
 
             <div class="section-title" style="margin-top:28px;margin-bottom:16px">GA4 / Web Analytics</div>
             <div class="metrics-row" id="ga4Metrics"></div>
@@ -553,6 +620,14 @@
             return { text: `${sign}${v}${suffix}`, cls };
         }
     };
+
+    function renderInsight(elementId, text) {
+        const el = document.getElementById(elementId);
+        if (el && text) {
+            el.innerHTML = `<div class="insight-label">Insight</div><div>${text}</div>`;
+            el.style.display = 'block';
+        }
+    }
 
     function makeKpiCard(label, value, delta, colorClass, historyKey) {
         const d = typeof delta === 'object' ? delta : fmt.delta(delta);
@@ -753,6 +828,7 @@
         const a = DATA.amazon;
         const h = HISTORY;
 
+        renderInsight('amazonInsight', a.insight);
         document.getElementById('amazonMetrics').innerHTML = [
             makeMetricMini('Gross Revenue', fmt.usd(a.grossRevenue), a.grossRevenueWoW, '%'),
             makeMetricMini('Net Profit', fmt.usd(a.netProfit), a.netProfitWoW, '%'),
@@ -822,6 +898,7 @@
         const d = DATA.dtc;
         const h = HISTORY;
 
+        renderInsight('dtcInsight', d.insight);
         document.getElementById('dtcMetrics').innerHTML = [
             makeMetricMini('Revenue', fmt.usd(d.revenue), d.revenueWoW, '%'),
             makeMetricMini('AOV', fmt.usdDec(d.aov), d.aovWoW, '%'),
@@ -867,6 +944,7 @@
         const k = DATA.klaviyo;
         const d = DATA.dtc;
         const h = HISTORY;
+        renderInsight('klaviyoInsight', k.insight);
 
         document.getElementById('klaviyoMetrics').innerHTML = [
             makeMetricMini('Total Email Rev', fmt.usd(k.totalEmailRevenue), k.emailRevenueWoW, '%'),
@@ -919,6 +997,7 @@
     function renderPaid() {
         const p = DATA.paidMedia;
         const m = p.meta;
+        renderInsight('paidInsight', p.insight);
         const h = HISTORY;
 
         document.getElementById('paidMetrics').innerHTML = [
@@ -970,6 +1049,14 @@
             makeMetricMini('ROAS', fmt.x(m.roas), null),
             makeMetricMini('Purchases', fmt.num(m.purchases), null),
         ].join('');
+
+        // Meta campaign breakdown table
+        if (m.campaigns && m.campaigns.length > 0) {
+            document.getElementById('paidCampaignCard').style.display = 'block';
+            document.querySelector('#paidCampaignTable tbody').innerHTML = m.campaigns.map(c =>
+                `<tr><td>${c.name}</td><td class="num">${fmt.usd(c.spend)}</td><td class="num">${fmt.usd(c.revenue)}</td><td class="num">${fmt.x(c.roas)}</td></tr>`
+            ).join('');
+        }
     }
 
     // ============================================================
@@ -981,6 +1068,7 @@
         const ga = DATA.ga4;
         const h = HISTORY;
 
+        renderInsight('subsInsight', s.insight);
         document.getElementById('subsMetrics').innerHTML = [
             makeMetricMini('Active Subs', fmt.num(s.activeSubscriptions), null),
             makeMetricMini('Subscribers', fmt.num(s.activeSubscribers), null),
@@ -1033,6 +1121,27 @@
             makeMetricMini('Reach', fmt.num(ig.reach), ig.reachWoW, '%'),
             makeMetricMini('Posts MTD', soc.postsMonthToDate + ' / ' + soc.postsMonthTarget, null),
         ].join('');
+
+        renderInsight('socialInsight', soc.insight);
+
+        // Top performing post
+        const tp = ig.topPost;
+        if (tp && tp.description) {
+            document.getElementById('topPostCard').style.display = 'block';
+            document.getElementById('topPostContent').innerHTML = `
+                <div class="top-post">
+                    <div>
+                        <div class="top-post-description">${tp.description}</div>
+                        <div class="top-post-stats">
+                            <span>❤️ <strong>${fmt.num(tp.likes)}</strong> likes</span>
+                            <span>💬 <strong>${fmt.num(tp.comments)}</strong> comments</span>
+                            ${tp.shares ? `<span>🔄 <strong>${fmt.num(tp.shares)}</strong> shares</span>` : ''}
+                        </div>
+                        ${tp.url ? `<a href="${tp.url}" target="_blank">View on Instagram →</a>` : ''}
+                    </div>
+                </div>
+            `;
+        }
 
         // GA4 metrics
         document.getElementById('ga4Metrics').innerHTML = [
