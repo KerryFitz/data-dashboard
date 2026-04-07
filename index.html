@@ -578,6 +578,7 @@
     // ============================================================
     let DATA = null;
     let HISTORY = null;
+    let weeks = [];
     const chartInstances = {};
 
     async function loadData() {
@@ -700,6 +701,11 @@
     // RENDER ALL
     // ============================================================
     function renderAll() {
+        // Build global date-range labels for all charts
+        weeks = HISTORY.map(w => {
+            const dr = w.dateRange || w.week;
+            return dr.replace(/\s–\s/g, '–').replace(/0(\d)\b/g, '$1');
+        });
         renderHeader();
         renderOverview();
         renderAmazon();
@@ -728,11 +734,6 @@
     function renderOverview() {
         const d = DATA;
         const h = HISTORY;
-        const weeks = h.map(w => {
-            // Shorten "Mar 31 – Apr 06" to "Mar 31–Apr 6"
-            const dr = w.dateRange || w.week;
-            return dr.replace(/\s–\s/g, '–').replace(/0(\d)\b/g, '$1');
-        });
 
         // KPI Cards
         document.getElementById('overviewKpis').innerHTML = [
