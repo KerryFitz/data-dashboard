@@ -653,7 +653,11 @@
     function renderOverview() {
         const d = DATA;
         const h = HISTORY;
-        const weeks = h.map(w => w.week);
+        const weeks = h.map(w => {
+            // Shorten "Mar 31 – Apr 06" to "Mar 31–Apr 6"
+            const dr = w.dateRange || w.week;
+            return dr.replace(/\s–\s/g, '–').replace(/0(\d)\b/g, '$1');
+        });
 
         // KPI Cards
         document.getElementById('overviewKpis').innerHTML = [
@@ -774,7 +778,7 @@
         createChart('amazonRevChart', {
             type: 'line',
             data: {
-                labels: h.map(w => w.week),
+                labels: weeks,
                 datasets: [{ label: 'Amazon Revenue', data: h.map(w => w.amazon), borderColor: CHART_COLORS.amazon, backgroundColor: CHART_COLORS.amazon + '15', borderWidth: 2.5, pointRadius: 4, tension: 0.3, fill: true }]
             },
             options: { ...baseChartOpts, scales: { ...baseChartOpts.scales, y: { ...baseChartOpts.scales.y, ticks: { ...baseChartOpts.scales.y.ticks, callback: v => '$' + (v / 1000).toFixed(0) + 'K' } } } }
@@ -784,7 +788,7 @@
         createChart('amazonTacosChart', {
             type: 'line',
             data: {
-                labels: h.map(w => w.week),
+                labels: weeks,
                 datasets: [
                     { label: 'TACOS %', data: h.map(w => w.tacos), borderColor: CHART_COLORS.tacos, borderWidth: 2.5, pointRadius: 4, tension: 0.3, yAxisID: 'y' },
                     { label: 'Margin %', data: h.map(w => w.amazonMargin || 0), borderColor: CHART_COLORS.margin, borderWidth: 2.5, pointRadius: 4, tension: 0.3, yAxisID: 'y1' }
@@ -830,7 +834,7 @@
         createChart('dtcRevChart', {
             type: 'line',
             data: {
-                labels: h.map(w => w.week),
+                labels: weeks,
                 datasets: [{ label: 'DTC Revenue', data: h.map(w => w.dtc), borderColor: CHART_COLORS.dtc, backgroundColor: CHART_COLORS.dtc + '15', borderWidth: 2.5, pointRadius: 4, tension: 0.3, fill: true }]
             },
             options: { ...baseChartOpts, scales: { ...baseChartOpts.scales, y: { ...baseChartOpts.scales.y, ticks: { ...baseChartOpts.scales.y.ticks, callback: v => '$' + (v / 1000).toFixed(0) + 'K' } } } }
@@ -839,7 +843,7 @@
         createChart('dtcAovChart', {
             type: 'line',
             data: {
-                labels: h.map(w => w.week),
+                labels: weeks,
                 datasets: [
                     { label: 'AOV', data: h.map(w => w.aov), borderColor: CHART_COLORS.dtc, borderWidth: 2.5, pointRadius: 4, tension: 0.3, yAxisID: 'y' },
                     { label: 'CVR %', data: h.map(w => w.dtcCvr), borderColor: CHART_COLORS.total, borderWidth: 2.5, pointRadius: 4, tension: 0.3, yAxisID: 'y1' }
@@ -892,7 +896,7 @@
         createChart('emailRevChart', {
             type: 'line',
             data: {
-                labels: h.map(w => w.week),
+                labels: weeks,
                 datasets: [{ label: 'Email Revenue', data: h.map(w => w.klaviyo), borderColor: CHART_COLORS.klaviyo, backgroundColor: CHART_COLORS.klaviyo + '15', borderWidth: 2.5, pointRadius: 4, tension: 0.3, fill: true }]
             },
             options: { ...baseChartOpts, scales: { ...baseChartOpts.scales, y: { ...baseChartOpts.scales.y, ticks: { ...baseChartOpts.scales.y.ticks, callback: v => '$' + (v / 1000).toFixed(1) + 'K' } } } }
@@ -941,7 +945,7 @@
         createChart('roasTrendChart', {
             type: 'line',
             data: {
-                labels: h.map(w => w.week),
+                labels: weeks,
                 datasets: [
                     { label: 'Meta ROAS', data: h.map(w => w.metaRoas), borderColor: CHART_COLORS.meta, borderWidth: 2.5, pointRadius: 4, tension: 0.3 },
                     { label: 'Target (3.5x)', data: h.map(() => 3.5), borderColor: '#E74C3C', borderWidth: 1, borderDash: [4, 4], pointRadius: 0 }
@@ -993,7 +997,7 @@
         createChart('subsChart', {
             type: 'line',
             data: {
-                labels: h.map(w => w.week),
+                labels: weeks,
                 datasets: [{ label: 'Active Subscriptions', data: h.map(w => w.activeSubscriptions), borderColor: CHART_COLORS.subs, backgroundColor: CHART_COLORS.subs + '15', borderWidth: 2.5, pointRadius: 4, tension: 0.3, fill: true }]
             },
             options: baseChartOpts
@@ -1003,7 +1007,7 @@
         createChart('socialChart', {
             type: 'line',
             data: {
-                labels: h.map(w => w.week),
+                labels: weeks,
                 datasets: [
                     { label: 'IG Followers', data: h.map(w => w.igFollowers), borderColor: CHART_COLORS.ig, borderWidth: 2.5, pointRadius: 4, tension: 0.3, yAxisID: 'y' },
                     { label: 'Engagement', data: h.map(w => w.igEngagement), borderColor: CHART_COLORS.social, borderWidth: 2.5, pointRadius: 4, tension: 0.3, yAxisID: 'y1' }
