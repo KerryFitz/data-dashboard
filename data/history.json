@@ -1,65 +1,65 @@
 [
   {
     "week": "W06", "dateRange": "Feb 2 – Feb 8",
-    "totalRevenue": 95200, "amazon": 62400, "dtc": 21800, "klaviyo": 5800, "subscriptions": 4600, "paidSpend": 2100,
+    "totalRevenue": 101200, "amazon": 82400, "dtc": 18800, "klaviyo": 5200, "subscriptions": 3950, "paidSpend": 2100,
     "metaRoas": 2.4, "blendedRoas": 2.4,
-    "aov": 30.50, "dtcCvr": 2.1, "tacos": 3.1, "amazonMargin": 36.2,
-    "activeSubscriptions": 3950, "igFollowers": 76800, "igEngagement": 95,
+    "aov": 30.50, "dtcCvr": 2.1, "tacos": 4.8, "amazonMargin": 38.2,
+    "activeSubscriptions": 4150, "igFollowers": 78100, "igEngagement": 95,
     "ga4Sessions": 16200
   },
   {
     "week": "W07", "dateRange": "Feb 9 – Feb 15",
-    "totalRevenue": 98100, "amazon": 65200, "dtc": 22300, "klaviyo": 5900, "subscriptions": 4650, "paidSpend": 2200,
+    "totalRevenue": 103100, "amazon": 83600, "dtc": 19500, "klaviyo": 5400, "subscriptions": 4050, "paidSpend": 2200,
     "metaRoas": 2.6, "blendedRoas": 2.6,
-    "aov": 30.80, "dtcCvr": 2.2, "tacos": 2.9, "amazonMargin": 36.8,
-    "activeSubscriptions": 3970, "igFollowers": 77000, "igEngagement": 102,
+    "aov": 30.80, "dtcCvr": 2.2, "tacos": 4.5, "amazonMargin": 38.8,
+    "activeSubscriptions": 4140, "igFollowers": 78150, "igEngagement": 102,
     "ga4Sessions": 16500
   },
   {
     "week": "W08", "dateRange": "Feb 16 – Feb 22",
-    "totalRevenue": 100500, "amazon": 67100, "dtc": 22500, "klaviyo": 6100, "subscriptions": 4700, "paidSpend": 2300,
+    "totalRevenue": 104500, "amazon": 84800, "dtc": 19700, "klaviyo": 5500, "subscriptions": 4100, "paidSpend": 2300,
     "metaRoas": 2.5, "blendedRoas": 2.5,
-    "aov": 31.20, "dtcCvr": 2.3, "tacos": 2.8, "amazonMargin": 37.1,
-    "activeSubscriptions": 3990, "igFollowers": 77200, "igEngagement": 110,
+    "aov": 31.20, "dtcCvr": 2.3, "tacos": 4.3, "amazonMargin": 39.1,
+    "activeSubscriptions": 4130, "igFollowers": 78200, "igEngagement": 110,
     "ga4Sessions": 16800
   },
   {
     "week": "W09", "dateRange": "Feb 23 – Mar 1",
-    "totalRevenue": 103800, "amazon": 69500, "dtc": 23100, "klaviyo": 6200, "subscriptions": 4750, "paidSpend": 2250,
+    "totalRevenue": 106200, "amazon": 86100, "dtc": 20100, "klaviyo": 5700, "subscriptions": 4150, "paidSpend": 2250,
     "metaRoas": 2.7, "blendedRoas": 2.7,
-    "aov": 31.50, "dtcCvr": 2.3, "tacos": 2.7, "amazonMargin": 37.5,
-    "activeSubscriptions": 4010, "igFollowers": 77400, "igEngagement": 118,
+    "aov": 31.50, "dtcCvr": 2.3, "tacos": 4.1, "amazonMargin": 39.5,
+    "activeSubscriptions": 4125, "igFollowers": 78250, "igEngagement": 118,
     "ga4Sessions": 17100
   },
   {
     "week": "W10", "dateRange": "Mar 2 – Mar 8",
-    "totalRevenue": 105200, "amazon": 70800, "dtc": 23400, "klaviyo": 6300, "subscriptions": 4800, "paidSpend": 2400,
+    "totalRevenue": 107500, "amazon": 87200, "dtc": 20300, "klaviyo": 5800, "subscriptions": 4200, "paidSpend": 2400,
     "metaRoas": 2.3, "blendedRoas": 2.3,
-    "aov": 31.80, "dtcCvr": 2.4, "tacos": 2.6, "amazonMargin": 37.8,
-    "activeSubscriptions": 4030, "igFollowers": 77600, "igEngagement": 105,
+    "aov": 31.80, "dtcCvr": 2.4, "tacos": 4.0, "amazonMargin": 40.2,
+    "activeSubscriptions": 4120, "igFollowers": 78320, "igEngagement": 105,
     "ga4Sessions": 17300
   },
   {
     "week": "W11", "dateRange": "Mar 9 – Mar 15",
-    "totalRevenue": 108500, "amazon": 73200, "dtc": 23800, "klaviyo": 6400, "subscriptions": 4850, "paidSpend": 2350,
+    "totalRevenue": 108500, "amazon": 87800, "dtc": 20700, "klaviyo": 5900, "subscriptions": 4250, "paidSpend": 2350,
     "metaRoas": 2.2, "blendedRoas": 2.2,
-    "aov": 31.60, "dtcCvr": 2.3, "tacos": 2.5, "amazonMargin": 38.0,
-    "activeSubscriptions": 4050, "igFollowers": 77800, "igEngagement": 112,
+    "aov": 31.60, "dtcCvr": 2.3, "tacos": 3.9, "amazonMargin": 40.8,
+    "activeSubscriptions": 4109, "igFollowers": 78400, "igEngagement": 112,
     "ga4Sessions": 17500
   },
   {
-    "week": "W12", "dateRange": "Mar 16 – Mar 22",
-    "totalRevenue": 112400, "amazon": 76500, "dtc": 24100, "klaviyo": 6500, "subscriptions": 4900, "paidSpend": 2500,
+    "week": "W12", "dateRange": "Mar 17 – Mar 23",
+    "totalRevenue": 108302, "amazon": 88479, "dtc": 19823, "klaviyo": 5831, "subscriptions": 4213, "paidSpend": 2500,
     "metaRoas": 1.8, "blendedRoas": 1.8,
-    "aov": 31.40, "dtcCvr": 2.4, "tacos": 2.4, "amazonMargin": 38.2,
-    "activeSubscriptions": 4070, "igFollowers": 78000, "igEngagement": 98,
-    "ga4Sessions": 17800
+    "aov": 30.37, "dtcCvr": 1.5, "tacos": 4.3, "amazonMargin": 42.0,
+    "activeSubscriptions": 4094, "igFollowers": 78452, "igEngagement": 959,
+    "ga4Sessions": 17088
   },
   {
-    "week": "W13", "dateRange": "Mar 23 – Mar 29",
-    "totalRevenue": 113579, "amazon": 89166, "dtc": 24413, "klaviyo": 6269, "subscriptions": 5100, "paidSpend": 2600,
+    "week": "W13", "dateRange": "Mar 24 – Mar 30",
+    "totalRevenue": 113579, "amazon": 89166, "dtc": 24413, "klaviyo": 6269, "subscriptions": 5226, "paidSpend": 2600,
     "metaRoas": 1.5, "blendedRoas": 1.5,
-    "aov": 31.68, "dtcCvr": 2.0, "tacos": 3.3, "amazonMargin": 42.1,
+    "aov": 31.69, "dtcCvr": 2.0, "tacos": 3.3, "amazonMargin": 42.1,
     "activeSubscriptions": 4085, "igFollowers": 78437, "igEngagement": 109,
     "ga4Sessions": 16939
   },
