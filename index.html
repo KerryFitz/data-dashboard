@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monday Morning Pulse — Humble Brands</title>
+    <title>Humble Data Pulse</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Data Pulse">
+    <meta name="theme-color" content="#2E75B6">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
     <style>
         :root {
@@ -299,8 +306,8 @@
     <header>
         <div class="header-content">
             <div class="header-top">
-                <h1>Monday Morning Pulse</h1>
-                <span class="header-meta">Humble Brands</span>
+                <img src="icons/logo-navy.png" alt="Humble Brands" style="height: 28px; margin-right: 12px; vertical-align: middle;">
+                <h1>Humble Data Pulse</h1>
             </div>
             <div class="header-date" id="headerDate">Loading...</div>
             <div class="source-badges" id="sourceBadges"></div>
@@ -1055,6 +1062,11 @@
     // INIT
     // ============================================================
     document.addEventListener('DOMContentLoaded', loadData);
+
+    // Register service worker for PWA
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+    }
     </script>
 </body>
 </html>
