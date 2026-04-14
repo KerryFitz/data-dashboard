@@ -70,5 +70,13 @@
     "aov": 30.83, "dtcCvr": 2.6, "tacos": 2.2, "amazonMargin": 38.6,
     "activeSubscriptions": 4091, "igFollowers": 78509, "igEngagement": 67,
     "ga4Sessions": 14787
+  },
+  {
+    "week": "W15", "dateRange": "Apr 7 – Apr 13",
+    "totalRevenue": 113102, "amazon": 89495, "dtc": 23607, "klaviyo": 5463, "subscriptions": 4875, "paidSpend": 3727,
+    "metaRoas": 0.8, "blendedRoas": 0.8,
+    "aov": 29.94, "dtcCvr": 1.7, "tacos": 3.2, "amazonMargin": 38.1,
+    "activeSubscriptions": 4059, "igFollowers": 78555, "igEngagement": 673,
+    "ga4Sessions": 24230
   }
 ]
