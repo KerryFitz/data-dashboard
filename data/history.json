@@ -218,5 +218,25 @@
     "igFollowers": 78904,
     "igEngagement": 14852,
     "ga4Sessions": 30694
+  },
+  {
+    "week": "W17",
+    "dateRange": "Apr 21 \u2013 Apr 27",
+    "totalRevenue": 118734,
+    "amazon": 92549,
+    "dtc": 26186,
+    "klaviyo": 5519,
+    "subscriptions": 5240,
+    "paidSpend": 9391,
+    "metaRoas": 0.5,
+    "blendedRoas": 1.06,
+    "aov": 32.15,
+    "dtcCvr": 1.7,
+    "tacos": 7.3,
+    "amazonMargin": 35.0,
+    "activeSubscriptions": 4124,
+    "igFollowers": 79164,
+    "igEngagement": 1448,
+    "ga4Sessions": 26795
   }
 ]

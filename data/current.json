@@ -1,345 +1,388 @@
 {
   "meta": {
-    "week": "W16",
+    "week": "W17",
     "year": 2026,
-    "dateRange": "Apr 14 \u2013 Apr 20, 2026",
-    "generatedAt": "2026-04-21T01:42:00Z",
+    "dateRange": "Apr 21 \u2013 Apr 27, 2026",
+    "generatedAt": "2026-04-29T18:34:05Z",
+    "recoveredFrom": "Monday Evening Pulse scheduled task timed out 4/27 at 6:45 PM MT \u2014 recovered manually 4/29.",
     "sources": {
       "cassie": {
         "status": "ok",
-        "date": "2026-04-20"
+        "date": "2026-04-27"
       },
       "stella": {
         "status": "ok",
-        "date": "2026-04-20",
-        "note": "Received Monday; Stella now part of Monday pull (Wed refinement is conditional)"
+        "date": "2026-04-28",
+        "note": "WK17 Roll-Up reporting week is Apr 19\u201325 (Stella's Sat-end week)."
+      },
+      "vendo": {
+        "status": "ok",
+        "date": "2026-04-28"
       },
       "klaviyo": {
         "status": "ok",
-        "date": "2026-04-20",
-        "note": "Placed Order attribution still in 24\u201372h lag; Triple Whale is source of truth"
+        "date": "2026-04-28",
+        "note": "Placed Order attribution still in 24\u201372h lag; Triple Whale figures from Cassie are source of truth for email revenue."
       }
     }
   },
   "summary": {
-    "totalRevenue": 125697,
-    "totalRevenueWoW": 11.1,
+    "totalRevenue": 118734,
+    "totalRevenueWoW": -5.5,
     "signals": [
       {
-        "level": "green",
+        "level": "yellow",
         "channel": "Amazon",
-        "text": "$97.2K (+15.6% WoW) \u2014 #1 week YTD on Buy Box recovery to 67.9%. Hero singles Bergamot/Ginger, Simply Unscented, and Rosemary Mint all back in Buy Box and revenue up 120\u2013262%."
+        "text": "$92.5K (-2.9% WoW) \u2014 2nd best week YTD, +545% YoY. Pullback after the W16 peak. YTD now over $1M. Cassie reads the dip as not a concern."
       },
       {
-        "level": "green",
+        "level": "yellow",
         "channel": "DTC",
-        "text": "$28.5K (+20.7% WoW) with AOV jumping to $33.44 (+11.7%). CVR ticked up to 1.8% (+0.1pp). Best DTC week since mid-March."
-      },
-      {
-        "level": "green",
-        "channel": "Subscriptions",
-        "text": "Net +50 \u2014 an 82-sub swing from last week's -32. Active subs back to 4,112. First net-positive week in a month; rebound is real."
+        "text": "$26.2K (-8.1% WoW). AOV $32.15 (-3.9%). Sessions 23,980. CVR held at 1.7%. Returning customers carrying \u2014 55.3% of revenue."
       },
       {
         "level": "red",
         "channel": "Meta Ads",
-        "text": "ROAS 0.8x on $4,815 spend (+29.2%). Prospecting/Traffic/Interests 2026 campaign ate $1,440 for $17 in attributed revenue \u2014 0.0x. Retention/All RET is the only line paying (2.0x)."
+        "text": "ROAS 0.5x on $5,064 spend (+5.2%). Purchases -33.3% to 66, attributed revenue -32.7% to $2,489. Prospecting/Traffic line burned $1,589 for $104 (0.1x)."
+      },
+      {
+        "level": "red",
+        "channel": "Social",
+        "text": "IG engagement -90.3% to 1,448 (cadence problem \u2014 5 posts vs prior weeks). Reach -59.5%. Followers still up +260 to 79,164."
       },
       {
         "level": "green",
-        "channel": "Social",
-        "text": "One Reel (\"Desert-tested\") drove 727K reach (+112%), 14.3K likes, 465 comments \u2014 ~97% of all weekly engagement. +349 followers to 78,904."
+        "channel": "Paid Search (Stella)",
+        "text": "+41% WoW on platform revenue ($7,488), ROAS 1.73x. New Brand deodorant campaign delivering $6.52 ROAS in week 1 \u2014 well above the $4 benchmark. [humble vegan deodorant] exact match at 8.24x."
+      },
+      {
+        "level": "yellow",
+        "channel": "Subscriptions",
+        "text": "Net +10 (was +50 last week \u2014 40-sub deceleration). 81 new / 71 cancelled / 28 churned. Active subs 4,124."
       }
     ],
     "watchItems": [
       {
-        "action": "Restructure or pause B07H77H8ZM Sponsored Products bids",
-        "why": "Sensitive Unscented is eating 35.6% of Amazon ad spend at 68.3% ACoS / 1.46x ROAS. Flagged to PLTFRM; need written plan back from Holly before next call."
+        "action": "Pause/rework Meta Prospecting/Traffic/Interests 2026",
+        "why": "$1,589 spend \u2192 $104 attributed (0.1x) \u2014 dead budget. Only Retention (1.2x) is paying. Brief Stella + BWM to kill or reallocate before next Monday."
       },
       {
-        "action": "Kill or rework Meta Prospecting/Traffic/Interests 2026",
-        "why": "$1,440 for 1 purchase (0.0x ROAS) is dead budget. Reallocate to Retention/All RET (the only 2.0x line) or hold for new creative. Brief Stella for Wed."
+        "action": "Lean into Stella's new Brand deodorant Search campaign",
+        "why": "$6.52 ROAS in week 1 vs $4 benchmark; [humble vegan deodorant] exact at 8.24x. Approve a budget bump and ask Stella for the PMax restructure plan informed by this data."
       },
       {
-        "action": "Capitalize on the subscription rebound",
-        "why": "+50 net is an 82-sub swing. Ask Cassie for cohort source so Cooper can brief amplification (welcome flow tweak, paid retargeting on reactivators)."
+        "action": "Resolve Texas Cedarwood (B07JMWR5P3) FBA stockout",
+        "why": "-58% WoW driven by availability. Move to Holly @ PLTFRM today \u2014 preventable lost revenue while we ramp NB ad spend."
       },
       {
-        "action": "Replicate the desert Reel format",
-        "why": "One Reel = 727K reach at ~$9 CPM, outperforming paid prospecting creative. Brief Calvin on two more in the format; consider Spark Ad boost."
+        "action": "Increase IG posting cadence",
+        "why": "Engagement -90.3% on -59.5% reach with only 5 posts. Brief Calvin/Cassie: back to 7+/wk; replicate the Be Humble Giveaway format (474 likes / 841 comments)."
+      },
+      {
+        "action": "PDP/creative pass on Moroccan Rose (B091V49K5T)",
+        "why": "Emerging NB ad performer but CVR compressed 36.9% \u2192 29.7% WoW. Don't scale NB spend into a leaky funnel. Calvin to brief refreshed PDP."
       }
     ]
   },
   "amazon": {
-    "grossRevenue": 97201,
-    "grossRevenueWoW": 15.6,
-    "netProfit": 35975,
-    "netProfitWoW": 5.5,
-    "netMargin": 37.7,
-    "netMarginWoW": -0.4,
-    "tacos": 4.83,
-    "tacosWoW": 1.7,
-    "adSpend": 4695,
-    "adSpendWoW": 62.2,
-    "organicRevenue": 56871,
-    "organicPct": 58.5,
-    "ppcRevenue": 40330,
-    "ppcPct": 41.5,
-    "orders": 5400,
-    "units": 5717,
-    "buyBox": 67.94,
-    "roas": 8.59,
-    "ytdRevenue": 967993,
+    "grossRevenue": 92549,
+    "grossRevenueWoW": -2.9,
+    "netProfit": 32358,
+    "netProfitWoW": -10.1,
+    "netMargin": 35.0,
+    "netMarginWoW": -2.7,
+    "tacos": 7.3,
+    "tacosWoW": 2.3,
+    "adSpend": 6754,
+    "adSpendWoW": 40.5,
+    "organicRevenue": 80660,
+    "organicPct": 87.2,
+    "ppcRevenue": 11888,
+    "ppcPct": 12.8,
+    "orders": 5215,
+    "units": 5537,
+    "buyBox": 65.01,
+    "buyBoxWoW": -2.93,
+    "roas": 5.68,
+    "ytdRevenue": 1056974,
     "corridor": "Scale",
-    "status": "green",
-    "insight": "Best week YTD at $97.2K gross (+15.6% WoW), powered by Buy Box recovery to 67.94% (+1.0pp). Hero singles Bergamot/Ginger (+21.3pp BB, rev +120%), Simply Unscented (+46.9pp BB, rev +262%), and Rosemary Mint (+43pp BB, rev +218%) are the primary drivers. TACOS 4.83% and ROAS 8.59x stay well inside the 8.3% guardrail \u2014 room to scale. Watch item: B07H77H8ZM Sensitive Unscented = 35.6% of account ad spend at 68.3% ACoS / 1.46x ROAS."
+    "status": "yellow",
+    "insight": "Pullback week \u2014 $92.5K (-2.9%) after W16's record. 2nd best YTD, +545% YoY; YTD > $1.05M. TACOS 7.3% (within guardrail) as ad spend ramped +40.5% to $6,754. Buy Box softened to 65.0% on Simply Unscented dropping 13.1pp and Texas Cedarwood (B07JMWR5P3) FBA stockout. Moroccan Rose (B091V49K5T) emerging NB performer but CVR compressed 36.9%\u219229.7%. Approved to scale May ad spend to $75K with 15% TACOS KPI."
   },
   "dtc": {
-    "revenue": 28496,
-    "revenueWoW": 20.7,
-    "newCustomerRevenue": 11398,
-    "newCustomerPct": 40.0,
-    "returningCustomerRevenue": 17098,
-    "returningCustomerPct": 60.0,
-    "emailKlaviyoTotal": 7694,
-    "emailKlaviyoPctDTC": 27.0,
-    "emailKlaviyoWoW": 24.4,
-    "campaignRevenue": 6212,
-    "flowRevenue": 1481,
-    "subscriptionRevenue": 5697,
+    "revenue": 26186,
+    "revenueWoW": -8.1,
+    "newCustomerRevenue": 11702,
+    "newCustomerPct": 44.7,
+    "returningCustomerRevenue": 14484,
+    "returningCustomerPct": 55.3,
+    "emailKlaviyoTotal": 5519,
+    "emailKlaviyoPctDTC": 21.1,
+    "emailKlaviyoWoW": -28.3,
+    "campaignRevenue": 3687,
+    "flowRevenue": 1832,
+    "subscriptionRevenue": 5240,
     "subscriptionPctDTC": 20.0,
-    "aov": 33.44,
-    "trueAov": 32.8,
-    "aovWoW": 11.7,
-    "conversionRate": 1.8,
-    "conversionRateWoW": 0.1,
-    "sessions": 30694,
-    "bounceRate": 85.0,
-    "status": "green",
-    "insight": "DTC breakout week \u2014 $28.5K (+20.7% WoW), AOV up to $33.44 (+11.7%), CVR nudging back toward target at 1.8%. Email's share of DTC jumped to 27% on Klaviyo revenue of $7.7K (+24.4%). Sessions up 26.7% to 30,694 and conversion held flat despite the traffic surge \u2014 quality is back."
+    "aov": 32.15,
+    "trueAov": 31.37,
+    "aovWoW": -3.9,
+    "conversionRate": 1.7,
+    "conversionRateWoW": 0.0,
+    "sessions": 23980,
+    "bounceRate": 89.3,
+    "status": "yellow",
+    "insight": "DTC pulled back to $26.2K (-8.1%) after the W16 breakout. AOV slipped to $32.15 (-3.9%) but stayed above the $30 floor. CVR held 1.7%. Returning customers (55.3%) carried; new revenue dropped harder. Email's share of DTC compressed to 21.1% \u2014 Earth Day Giveaway was a non-revenue play."
   },
   "subscriptions": {
-    "activeSubscriptions": 4112,
-    "newThisWeek": 115,
-    "canceledThisWeek": 65,
-    "churnedSubscribers": 25,
-    "reactivated": 10,
-    "netChange": 50,
-    "netChangeWoW": 82,
-    "subscriptionRevenue": 5697,
-    "firstOrderRevenue": 1250,
-    "recurringRevenue": 4447,
-    "status": "green",
-    "insight": "First net-positive week in a month \u2014 +50 net, an 82-sub swing from last week's -32. Active subs back to 4,112. Need to identify what drove the rebound (campaign, content, or churn mechanical) so Cooper can amplify. Ask Cassie for the cohort source."
+    "activeSubscriptions": 4124,
+    "newThisWeek": 81,
+    "canceledThisWeek": 71,
+    "churnedSubscribers": 28,
+    "reactivated": 3,
+    "netChange": 10,
+    "netChangeWoW": -40,
+    "subscriptionRevenue": 5240,
+    "firstOrderRevenue": 1608,
+    "recurringRevenue": 3632,
+    "status": "yellow",
+    "insight": "Net +10 \u2014 still positive but a 40-sub deceleration from W16's +50. New 81 / cancelled 71 / churned 28 / reactivated 3. Active subs 4,124. Need Cassie's cohort source to know whether this is timing or the W16 acquisition cohort cooling."
   },
   "social": {
     "instagram": {
-      "followers": 78904,
-      "followersWoW": 349,
-      "postsPublished": 6,
-      "totalEngagement": 14852,
-      "engagementWoW": 2107,
-      "reach": 727736,
-      "reachWoW": 112,
-      "likes": 14300,
-      "comments": 465,
+      "followers": 79164,
+      "followersWoW": 260,
+      "postsPublished": 5,
+      "totalEngagement": 1448,
+      "engagementWoW": -90.3,
+      "reach": 294957,
+      "reachWoW": -59.5,
+      "likes": 598,
+      "comments": 850,
       "topPost": {
-        "likes": 14300,
-        "comments": 465,
-        "description": "Desert-tested Reel \u2014 drove ~97% of weekly engagement. Video-first format continues to dominate.",
-        "url": "https://www.instagram.com/reel/DXKsLd9lKx_/"
+        "likes": 474,
+        "comments": 841,
+        "description": "Be Humble. Do Good. Giveaway Reel \u2014 drove most of weekly engagement.",
+        "url": "https://www.instagram.com/reel/DXZ14-0keDY/"
       }
     },
-    "postsMonthToDate": 14,
+    "postsMonthToDate": 19,
     "postsMonthTarget": 18,
-    "status": "green",
-    "insight": "One Reel carried the week \u2014 'Desert-tested' drove 727K reach (+112%), 14.3K likes, 465 comments. Follower growth +349 to 78,904. Brief Calvin on 2 more in the format and consider a Spark Ad boost while engagement is hot."
+    "status": "red",
+    "insight": "Engagement collapsed -90.3% on -59.5% reach \u2014 cause is volume. Only 5 posts published vs prior cadence. Top post (Be Humble Giveaway, 474 likes / 841 comments) shows the giveaway format still works. Cadence back to 7+/wk; replicate giveaway format with one more drop in May."
   },
   "paidMedia": {
     "meta": {
-      "spend": 4815,
-      "spendWoW": 29.2,
-      "purchases": 99,
-      "purchasesWoW": 13.8,
-      "revenue": 3700,
-      "revenueWoW": 23.7,
-      "roas": 0.8,
-      "roasWoW": -4.3,
-      "costPerPurchase": 48.64,
+      "spend": 5064,
+      "spendWoW": 5.2,
+      "purchases": 66,
+      "purchasesWoW": -33.3,
+      "revenue": 2489,
+      "revenueWoW": -32.7,
+      "roas": 0.5,
+      "roasWoW": -36.0,
+      "costPerPurchase": 76.73,
       "campaigns": [
         {
           "name": "BWM | Advantage+ (Open + RTG)",
-          "spend": 2484,
-          "revenue": 1931,
-          "roas": 0.8
+          "spend": 2516,
+          "revenue": 1215,
+          "roas": 0.5
         },
         {
           "name": "BWM | Prospecting/Traffic/Interests 2026",
-          "spend": 1440,
-          "revenue": 17,
-          "roas": 0.0
+          "spend": 1589,
+          "revenue": 104,
+          "roas": 0.1
         },
         {
           "name": "BWM | Retention/All RET 2026",
-          "spend": 891,
-          "revenue": 1752,
-          "roas": 2.0
+          "spend": 958,
+          "revenue": 1170,
+          "roas": 1.2
         }
       ]
     },
     "google": {
-      "spend": null,
-      "roas": null,
-      "note": "Stella Rising WK16 report received 4/20; Google view to be merged into Monday numbers going forward."
+      "spend": 4327,
+      "revenue": 7488,
+      "roas": 1.73,
+      "roasWoW": 41.0,
+      "highlight": "New Brand deodorant campaign at $6.52 ROAS in week 1 (above $4 benchmark). [humble vegan deodorant] exact match at 8.24x.",
+      "watch": "Brand & non-brand lip balm zero conversions; soap demand exists but budget-constrained. Stella shifting budget to soap; PMax restructure incoming."
     },
-    "totalSpend": 4815,
-    "totalSpendNote": "Meta only in tonight's totals; Stella's Google view merges into Monday pulls starting WK17",
-    "blendedRoas": 0.8,
+    "totalSpend": 9391,
+    "blendedRoas": 1.06,
+    "stellaTopline": {
+      "topline_revenue": 25939,
+      "platform_revenue": 10545,
+      "spend": 9773,
+      "topline_roas": 2.65,
+      "paid_roas": 1.08
+    },
     "status": "red",
-    "insight": "Meta ROAS 0.8x on $4,815 spend (+29.2%). Prospecting/Traffic/Interests 2026 is dead weight \u2014 $1,440 for $17 attributed (0.0x). Retention/All RET (2.0x) is carrying. Immediate action: pause Prospecting line and reallocate to Retention or hold for new creative."
+    "insight": "Meta ROAS 0.5x is the standout red \u2014 close to breakeven, with Prospecting/Traffic 2026 line dead at 0.1x. Stella Paid Search saved the paid blend (1.73x, +41% WoW) on the strength of the new Brand deodorant campaign (6.52x). Blended paid ROAS ~1.06x at $9.4K spend."
   },
   "ga4": {
-    "sessions": 30694,
-    "sessionsWoW": 26.7,
-    "conversionRate": 1.13,
+    "sessions": 26795,
+    "sessionsWoW": -12.7,
+    "users": 26054,
+    "newUsers": 25464,
+    "pageViews": 66066,
+    "conversionRate": 1.1,
     "conversionRateWoW": 0.0,
+    "conversions": 294,
     "trafficSources": [
       {
         "source": "Direct",
-        "sessions": 18815,
-        "pct": 61.3
+        "sessions": 12071,
+        "pct": 45.0
       },
       {
         "source": "Paid Social",
-        "sessions": 6170,
-        "pct": 20.1
+        "sessions": 10157,
+        "pct": 37.9
       },
       {
         "source": "Organic Search",
-        "sessions": 2241,
-        "pct": 7.3
+        "sessions": 2084,
+        "pct": 7.8
+      },
+      {
+        "source": "Paid Search",
+        "sessions": 1305,
+        "pct": 4.9
       },
       {
         "source": "Email",
-        "sessions": 1228,
-        "pct": 4.0
+        "sessions": 492,
+        "pct": 1.8
       },
       {
-        "source": "Referral",
-        "sessions": 614,
-        "pct": 2.0
+        "source": "Cross-network",
+        "sessions": 477,
+        "pct": 1.8
       }
     ],
     "topPages": [
       {
+        "page": "/collections/all",
+        "sessions": 10420
+      },
+      {
         "page": "/products/aluminum-free-deodorant",
-        "sessions": 14567
+        "sessions": 8324
       },
       {
         "page": "/",
-        "sessions": 3500
+        "sessions": 2439
       },
       {
-        "page": "/collections/all",
-        "sessions": 2100
+        "page": "/collections/deodorant",
+        "sessions": 1000
       }
     ],
-    "status": "green",
-    "insight": "Sessions surged to 30,694 (+26.7%); CVR held flat at 1.13%. Aluminum-free deodorant PDP captured 47% of all site traffic \u2014 a single page is carrying discovery."
+    "status": "yellow",
+    "insight": "Sessions pulled back to 26,795 (-12.7%). CVR steady at 1.10%. Direct traffic share jumped to 45% \u2014 could indicate brand demand. Aluminum-Free Deodorant PDP still the workhorse at 8,324 sessions."
   },
   "klaviyo": {
-    "totalEmailRevenue": 7694,
-    "emailRevenueWoW": 24.4,
-    "emailRevenueAsPctDTC": 27.0,
-    "campaignRevenue": 6212,
-    "flowRevenue": 1481,
+    "totalEmailRevenue": 5519,
+    "emailRevenueWoW": -28.3,
+    "emailRevenueAsPctDTC": 21.1,
+    "campaignRevenue": 3687,
+    "flowRevenue": 1832,
     "campaigns": [
       {
-        "name": "Energize Bundle (4/14)",
-        "sent": 44110,
-        "openRate": 51.0,
-        "clickRate": 1.15
-      },
-      {
-        "name": "Energize Bundle resend (4/17)",
-        "sent": 22019,
-        "openRate": 30.7,
-        "clickRate": 0.73
-      },
-      {
-        "name": "Q1 Employee Newsletter (4/20)",
-        "sent": 52,
-        "openRate": 46.2,
-        "clickRate": 1.92
+        "name": "Earth Day Giveaway (4/22)",
+        "sent": 44064,
+        "openRate": 47.9,
+        "clickRate": 0.76,
+        "note": "Giveaway entry play, not a revenue campaign. 132 unsubs."
       }
     ],
     "flows": [
       {
         "name": "BW Sunset",
-        "sent": 1504,
-        "openRate": 51.0
+        "sent": 1916,
+        "openRate": 82.2,
+        "clickRate": 0.21
       },
       {
-        "name": "Okendo Review",
-        "sent": 1576,
-        "openRate": 33.0
+        "name": "BW Welcome Email",
+        "sent": 962,
+        "openRate": 42.9,
+        "clickRate": 2.2
       },
       {
-        "name": "BW Welcome",
-        "sent": 1166,
-        "openRate": 44.0
+        "name": "Okendo Review Request",
+        "sent": 822,
+        "openRate": 39.3,
+        "clickRate": 0.73
+      },
+      {
+        "name": "BW Cross Sell",
+        "sent": 480,
+        "openRate": 39.6,
+        "clickRate": 0.83
       },
       {
         "name": "Customer Thank You",
-        "sent": 442,
-        "openRate": 49.0
+        "sent": 378,
+        "openRate": 52.0,
+        "clickRate": 1.87
+      },
+      {
+        "name": "BW Replenishment",
+        "sent": 344,
+        "openRate": 40.4,
+        "clickRate": 0.87
       }
     ],
-    "status": "green",
-    "insight": "Total Klaviyo attributed revenue $7,694 (+24.4% WoW), 27% of DTC. Energize Bundle (4/14) was top performer at 51.0% open rate on 44K sends. Placed Order attribution still in 24\u201372h lag \u2014 Triple Whale is source of truth for the week."
+    "status": "yellow",
+    "insight": "Email revenue -28.3% to $5,519 (Triple Whale). Only one campaign in the window \u2014 Earth Day Giveaway \u2014 at 47.9% open / 0.76% click on 44K sends. Giveaway entry, not revenue play. Flows are the steady carriers."
   },
   "guardrails": {
     "amazonMargin": {
-      "value": 37.7,
+      "value": 35.0,
       "target": 30.0,
       "pass": true
     },
     "tacos": {
-      "value": 4.83,
+      "value": 7.3,
       "target": 8.3,
-      "pass": true
+      "pass": true,
+      "note": "Within guardrail but ramping toward 15% KPI as we scale to $75K May spend."
     },
     "dtcCVR": {
-      "value": 1.8,
+      "value": 1.7,
       "target": 2.0,
       "pass": false
     },
     "dtcAOV": {
-      "value": 33.44,
+      "value": 32.15,
       "target": 30.0,
       "pass": true
     },
     "subNetChange": {
-      "value": 50,
+      "value": 10,
       "target": 0,
       "pass": true
     },
     "metaRoas": {
-      "value": 0.8,
+      "value": 0.5,
       "target": 3.5,
       "pass": false
     },
-    "dtcMER": {
-      "value": null,
-      "target": null,
-      "pending": true,
-      "note": "Pending Stella Rising full view Wed"
+    "blendedPaidRoas": {
+      "value": 1.06,
+      "target": 2.5,
+      "pass": false,
+      "note": "Stella Paid Search 1.73x lifted blend; Meta 0.5x dragged it down."
     },
     "socialPosts": {
-      "value": 14,
+      "value": 19,
       "target": 18,
-      "pending": true,
-      "note": "14 of 18 month target"
+      "pass": true,
+      "note": "Hit MTD target but week-over-week cadence collapsed \u2014 see Social signal."
     }
   }
 }
